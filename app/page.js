@@ -4,7 +4,7 @@ import { fetchMetadata } from "frames.js/next";
 
 export async function generateMetadata() {
   return {
-    title: "Wrecked",
+    title: "Wrecked - Get Wrecked!",
     // provide a full URL to your /frames endpoint
     other: await fetchMetadata(
       new URL(
