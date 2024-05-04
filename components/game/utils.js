@@ -1,6 +1,4 @@
 import axios from "axios";
-import * as fs from "node:fs/promises";
-import * as path from "node:path";
 
 export async function checkFollower(fid, channelId) {
   const response = await axios.get(

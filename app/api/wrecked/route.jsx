@@ -1,7 +1,7 @@
 import { frames } from "./frames";
 import { Intro } from "@/components/frames/Intro";
 import { Play } from "@/components/frames/Play";
-import { Result } from "@/components/frames/result";
+import { Result } from "@/components/frames/Result";
 
 const handleRequest = frames(async (ctx) => {
   try {
