@@ -21,6 +21,7 @@ export const Intro = async ({ gameId, ctx }) => {
             opacity: "0.8",
             color: "black",
           }}
+          key={Math.random()}
         >
           <p
             tw="flex flex-col break-words text-center"
@@ -41,6 +42,7 @@ export const Intro = async ({ gameId, ctx }) => {
             opacity: "0.8",
             color: "black",
           }}
+          key={Math.random()}
         >
           <p
             tw="flex flex-col break-words text-center"
