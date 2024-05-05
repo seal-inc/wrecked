@@ -9,10 +9,10 @@ export const Intro = async ({ gameId, ctx }) => {
     image: (
       <div
         tw="flex flex-col items-center justify-around w-full h-full p-[3rem]"
-        // style={{
-        //   backgroundImage: `url(${process.env.APP_URL}/wrecked.jpg)`,
-        //   backgroundSize: "cover",
-        // }}
+        style={{
+          backgroundImage: `url(${process.env.APP_URL}/wrecked.jpg)`,
+          backgroundSize: "cover",
+        }}
       >
         <div
           tw="flex flex-col rounded-[3rem] p-[0.3rem] w-4/5 items-center"
