@@ -22,16 +22,16 @@ const AudiowideRegularFont = fs.readFile(
 );
 
 export const fonts = await Promise.all([
-  {
-    name: "Press Start 2P",
-    data: await PressStart2PRegularFont,
-    weight: 400,
-  },
-  {
-    name: "Monoton",
-    data: await MonotonRegularFont,
-    weight: 400,
-  },
+  // {
+  //   name: "Press Start 2P",
+  //   data: await PressStart2PRegularFont,
+  //   weight: 400,
+  // },
+  // {
+  //   name: "Monoton",
+  //   data: await MonotonRegularFont,
+  //   weight: 400,
+  // },
   {
     name: "Audiowide",
     data: await AudiowideRegularFont,

@@ -8,20 +8,15 @@ export const Result = async ({ ctx }) => {
   return {
     image: (
       <span tw="m-6">
-        {game.winner === play.player
-          ? `You won the jackpot sum of ${game.current_prize}! Congratulations!`
-          : "Sorry, you didn't get it this time. Try again, the pool just got bigger!"}
+        {play.amount_won > 0
+          ? `You won ${game.current_prize}! Congratulations! Continue playing to win more!`
+          : "Sorry, you didn't get it this time. Try again, the pot just got bigger!"}
       </span>
     ),
     buttons: [
-      !game.winner && (
-        <Button
-          action="post"
-          target={{ query: { value: "Play", id: game.id } }}
-        >
-          Try again
-        </Button>
-      ),
+      <Button action="post" target={{ query: { value: "Play", id: game.id } }}>
+        Try again
+      </Button>,
     ],
   };
 };

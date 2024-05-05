@@ -62,7 +62,7 @@ export const updateGameBalance = async (
 ) => {
   const { data, error } = await supabase
     .from("games")
-    .update({ current_prize: current_prize + base_cost_of_play })
+    .update({ current_prize: current_prize + base_cost_of_play * 0.5 })
     .eq("id", gameId)
     .select()
     .single();
@@ -72,10 +72,15 @@ export const updateGameBalance = async (
   return data;
 };
 
-export const updatePlay = async (playId, transaction_hash, has_won) => {
+export const updatePlay = async (
+  playId,
+  transaction_hash,
+  has_won,
+  amount_won
+) => {
   const { data, error } = await supabase
     .from("plays")
-    .update({ transaction_hash, has_won })
+    .update({ transaction_hash, has_won, amount_won })
     .eq("id", playId)
     .select()
     .single();
