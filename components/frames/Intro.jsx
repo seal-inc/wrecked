@@ -10,7 +10,7 @@ export const Intro = async ({ gameId, ctx }) => {
       <div
         tw="flex flex-col items-center justify-around w-full h-full p-[3rem]"
         style={{
-          backgroundImage: `url(${process.env.APP_URL}/wrecked.jpg)`,
+          backgroundImage: `url(${process.env.APP_URL}/wrecked.jpeg)`,
           backgroundSize: "cover",
         }}
       >
