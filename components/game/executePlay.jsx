@@ -30,6 +30,8 @@ export async function executePlay(ctx, transaction_hash) {
     }
     console.log({ amountWon, randomGuess });
     await updatePlay(play.id, transaction_hash, amountWon > 0, amountWon);
+    amount &&
+      (await payWinnerAmount(ctx.message.connectedAddress, amountWon, game));
     amountWon === 0 &&
       (await updateGameBalance(
         game.id,
@@ -37,7 +39,6 @@ export async function executePlay(ctx, transaction_hash) {
         game.current_prize
       ));
     // Pay the winner
-    await payWinnerAmount(ctx.message.connectedAddress, amountWon, game);
   }
 
   return { play, game };
