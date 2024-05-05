@@ -5,6 +5,7 @@ export const Result = async ({ ctx }) => {
   // Get the game with the specific id
   const transaction_hash = ctx.message.transactionId;
   const { play, game } = await executePlay(ctx, transaction_hash);
+  
   return {
     image: (
       <span tw="m-6">
