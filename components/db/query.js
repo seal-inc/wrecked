@@ -78,6 +78,7 @@ export const updatePlay = async (
   has_won,
   amount_won
 ) => {
+  console.log({ playId, transaction_hash, has_won, amount_won });
   const { data, error } = await supabase
     .from("plays")
     .update({ transaction_hash, has_won, amount_won })

@@ -1,4 +1,33 @@
 import axios from "axios";
+import { createWalletClient, encodeFunctionData, http, parseEther } from "viem";
+import { privateKeyToAccount } from "viem/accounts";
+import usdcABI from "../../app/contracts/usdcABI.json" assert { type: "json" };
+import { base } from "viem/chains";
+
+export const payWinnerAmount = async (address, amount, game) => {
+  const client = createWalletClient({
+    chain: base,
+    transport: http(),
+  });
+
+  const account = privateKeyToAccount(process.env.WALLET_PRIVATE_KEY);
+
+  const decimals = 6;
+  const amountToSendInDecimals = amount * 10 ** decimals;
+
+  const calldata = encodeFunctionData({
+    abi: usdcABI,
+    functionName: "transfer",
+    args: [address, amountToSendInDecimals],
+  });
+
+  const hash = await client.sendTransaction({
+    account,
+    to: game.currency_erc20_contract_address,
+    data: calldata,
+  });
+  console.log({ hash });
+};
 
 export async function checkFollower(fid, channelId) {
   const response = await axios.get(

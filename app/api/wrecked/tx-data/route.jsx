@@ -1,5 +1,5 @@
 import { encodeFunctionData } from "viem";
-import usdcABI from "./contracts/usdcABI.json" assert { type: "json" };
+import usdcABI from "../../../contracts/usdcABI.json" assert { type: "json" };
 import { NextResponse } from "next/server";
 import { getFrameMessage } from "frames.js";
 import { getGameWithId } from "@/components/db/query";

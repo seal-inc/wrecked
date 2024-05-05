@@ -34,7 +34,7 @@ const handleRequest = async (req) => {
               lineHeight: "3rem",
             }}
           >
-            {play.won_amount > 0 ? "You won!" : "Better luck next time!"}
+            {play.amount_won > 0 ? "You won! 🔥🔥🔥" : "Better luck next time!"}
           </p>
         </div>
         <div
@@ -55,9 +55,9 @@ const handleRequest = async (req) => {
               lineHeight: "3rem",
             }}
           >
-            {play.won_amount > 0
-              ? `You won ${play.won_amount} ${game.currency_symbol}! It's in your wallet now!`
-              : `Try again the jackpot is even bigger now with ${game.currency_symbol}`}
+            {play.amount_won > 0
+              ? `You won ${play.amount_won} ${game.currency_symbol}! It's in your wallet now!`
+              : `Try again the jackpot is even bigger now with ${game.current_prize} ${game.currency_symbol}`}
           </p>
         </div>
       </div>
