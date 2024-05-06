@@ -17,17 +17,16 @@ export async function executePlay(ctx, transaction_hash) {
 
   if (!play.transaction_hash && !game.winner && game.active) {
     const randomGuess = Math.random();
-    console.log({ randomGuess, current_prize: game.current_prize });
     let amountWon = 0;
     if (randomGuess < 1 / game.current_prize) {
       amountWon = game.current_prize;
-    } else if (randomGuess < 0.05) {
+    } else if (randomGuess < 0.030625) {
       amountWon = game.current_prize * 16;
-    } else if (randomGuess < 0.1) {
+    } else if (randomGuess < 0.06125) {
       amountWon = game.base_cost_of_play * 8;
-    } else if (randomGuess < 0.2) {
+    } else if (randomGuess < 0.125) {
       amountWon = game.base_cost_of_play * 4;
-    } else if (randomGuess < 0.4) {
+    } else if (randomGuess < 0.25) {
       amountWon = game.base_cost_of_play * 2;
     }
     console.log({ amountWon, randomGuess });
