@@ -37,7 +37,7 @@ export const Play = async ({ gameId, ctx }) => {
                 query: { id: gameId, playId: play.id },
               }}
             >
-              Buy ticket
+              {`Buy ${game.base_cost_of_play} ${game.currency_symbol} ticket`}
             </Button>,
           ]
         : [

@@ -1,6 +1,6 @@
 import { Button } from "frames.js/next";
 import { executePlay } from "../game/executePlay";
-import { fetchWithTimeout } from "../game/utils";
+import { fetchWithTimeout, publicClient } from "../game/utils";
 
 export const Result = async ({ ctx }) => {
   // Get the game with the specific id
@@ -14,8 +14,18 @@ export const Result = async ({ ctx }) => {
   return {
     image: imageUrl,
     buttons: [
-      <Button action="post" target={{ query: { value: "Play", id: game.id } }}>
-        Try again
+      <Button
+        action="tx"
+        target={{
+          pathname: "/tx-data",
+          query: { id: game.id, playId: play.id },
+        }}
+        post_url={{
+          pathname: "/",
+          query: { id: game.id, playId: play.id },
+        }}
+      >
+        {`Buy ${game.base_cost_of_play} ${game.currency_symbol} ticket`}
       </Button>,
     ],
   };

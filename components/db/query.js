@@ -76,12 +76,13 @@ export const updatePlay = async (
   playId,
   transaction_hash,
   has_won,
-  amount_won
+  amount_won,
+  wallet
 ) => {
-  console.log({ playId, transaction_hash, has_won, amount_won });
+  console.log({ playId, transaction_hash, has_won, amount_won, wallet });
   const { data, error } = await supabase
     .from("plays")
-    .update({ transaction_hash, has_won, amount_won })
+    .update({ transaction_hash, has_won, amount_won, wallet })
     .eq("id", playId)
     .select()
     .single();
@@ -104,7 +105,6 @@ export async function getOrCreateUserWithId(fid) {
     return retrievedData;
   }
   const userData = await getUserDataForFid({ fid });
-  console.log({ userData });
   const data = { id: fid, username: userData?.username };
 
   // Step 3: If the record does not exist, insert a new one

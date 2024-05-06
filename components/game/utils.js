@@ -1,8 +1,18 @@
 import axios from "axios";
-import { createWalletClient, encodeFunctionData, http, parseEther } from "viem";
+import {
+  createPublicClient,
+  createWalletClient,
+  encodeFunctionData,
+  http,
+} from "viem";
 import { privateKeyToAccount } from "viem/accounts";
 import usdcABI from "../../app/contracts/usdcABI.json" assert { type: "json" };
 import { base } from "viem/chains";
+
+export const publicClient = createPublicClient({
+  chain: base,
+  transport: http(),
+});
 
 export const payWinnerAmount = async (address, amount, game) => {
   const client = createWalletClient({
@@ -26,7 +36,7 @@ export const payWinnerAmount = async (address, amount, game) => {
     to: game.currency_erc20_contract_address,
     data: calldata,
   });
-  console.log({ hash });
+  return transaction.status;
 };
 
 export async function checkFollower(fid, channelId) {
