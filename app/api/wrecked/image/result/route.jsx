@@ -1,11 +1,11 @@
-import { getGameWithId, getPlayWithId } from "@/components/db/query";
+import { getGameWithId } from "@/components/db/query";
 import { fonts } from "@/components/game/fonts";
 import { ImageResponse } from "next/og";
 
 const handleRequest = async (req) => {
-  const playId = req.nextUrl.searchParams.get("playId");
-  const play = await getPlayWithId(playId);
-  const game = await getGameWithId(play.game);
+  const amountWon = req.nextUrl.searchParams.get("amountWon");
+  const gameId = req.nextUrl.searchParams.get("gameId");
+  const game = await getGameWithId(gameId);
 
   return new ImageResponse(
     (
@@ -34,7 +34,7 @@ const handleRequest = async (req) => {
               lineHeight: "3rem",
             }}
           >
-            {play.amount_won > 0 ? "You won! 🔥🔥🔥" : "Better luck next time!"}
+            {amountWon > 0 ? "You won! 🔥🔥🔥" : "Better luck next time!"}
           </p>
         </div>
         <div
@@ -55,8 +55,8 @@ const handleRequest = async (req) => {
               lineHeight: "3rem",
             }}
           >
-            {play.amount_won > 0
-              ? `You won ${play.amount_won} ${game.currency_symbol}! It's in your wallet now!`
+            {amountWon > 0
+              ? `You won ${amountWon} ${game.currency_symbol}! It's in your wallet now!`
               : `Try again the jackpot is even bigger now with ${game.current_prize} ${game.currency_symbol}`}
           </p>
         </div>

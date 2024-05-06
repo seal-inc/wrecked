@@ -1,5 +1,4 @@
 import { Button } from "frames.js/next";
-import { fonts } from "../game/fonts";
 import { fetchWithTimeout } from "../game/utils";
 
 export const Intro = async ({ gameId, ctx }) => {

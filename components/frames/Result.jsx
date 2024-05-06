@@ -1,14 +1,18 @@
 import { Button } from "frames.js/next";
 import { executePlay } from "../game/executePlay";
-import { fetchWithTimeout, publicClient } from "../game/utils";
+import { fetchWithTimeout } from "../game/utils";
+import { getGameWithId } from "../db/query";
 
 export const Result = async ({ ctx }) => {
   // Get the game with the specific id
   const transaction_hash = ctx.message.transactionId;
-  const { play, game } = await executePlay(ctx, transaction_hash);
+  const playId = ctx.searchParams.playId;
+  const gameId = ctx.searchParams.id;
+  const game = await getGameWithId(gameId);
+  const { amountWon } = await executePlay(transaction_hash, game, playId);
   const imageUrl = `${
     process.env.APP_URL
-  }/api/wrecked/image/result?id=${Date.now()}&playId=${play.id}`;
+  }/api/wrecked/image/result?id=${Date.now()}&gameId=${gameId}&playId=${playId}&amountWon=${amountWon}`;
   await fetchWithTimeout([imageUrl]);
 
   return {
@@ -18,11 +22,11 @@ export const Result = async ({ ctx }) => {
         action="tx"
         target={{
           pathname: "/tx-data",
-          query: { id: game.id, playId: play.id },
+          query: { id: gameId, playId: playId },
         }}
         post_url={{
           pathname: "/",
-          query: { id: game.id, playId: play.id },
+          query: { id: gameId, playId: playId },
         }}
       >
         {`Buy ${game.base_cost_of_play} ${game.currency_symbol} ticket`}
