@@ -25,16 +25,20 @@ export async function executePlay(transaction_hash, game, playId) {
     amountWon = game.base_cost_of_play * 2;
   }
   console.log({ amountWon, randomGuess });
-  updatePlay(
+  await updatePlay(
     playId,
     transaction_hash,
     amountWon > 0,
     amountWon,
     transaction.from
   );
-  amountWon && payWinnerAmount(transaction.from, amountWon, game);
+  amountWon && (await payWinnerAmount(transaction.from, amountWon, game));
   amountWon === 0 &&
-    updateGameBalance(game.id, game.base_cost_of_play, game.current_prize);
+    (await updateGameBalance(
+      game.id,
+      game.base_cost_of_play,
+      game.current_prize
+    ));
   // }
   return { amountWon };
 }

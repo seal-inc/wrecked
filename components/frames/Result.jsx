@@ -1,6 +1,5 @@
 import { Button } from "frames.js/next";
 import { executePlay } from "../game/executePlay";
-import { fetchWithTimeout } from "../game/utils";
 import { getGameWithId } from "../db/query";
 
 export const Result = async ({ ctx }) => {
@@ -13,7 +12,6 @@ export const Result = async ({ ctx }) => {
   const imageUrl = `${
     process.env.APP_URL
   }/api/wrecked/image/result?id=${Date.now()}&gameId=${gameId}&playId=${playId}&amountWon=${amountWon}`;
-  await fetchWithTimeout([imageUrl]);
 
   return {
     image: imageUrl,

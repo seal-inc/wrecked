@@ -36,7 +36,7 @@ export const payWinnerAmount = async (address, amount, game) => {
     to: game.currency_erc20_contract_address,
     data: calldata,
   });
-  return transaction.status;
+  return hash;
 };
 
 export async function checkFollower(fid, channelId) {
@@ -56,7 +56,7 @@ export async function checkUSDCBalance(address) {
   return USDC;
 }
 
-export async function fetchWithTimeout(urls, timeout = 3000) {
+export async function fetchWithTimeout(urls, timeout = 1000) {
   const fetchPromises = urls.map((url) =>
     Promise.race([
       fetch(url),
