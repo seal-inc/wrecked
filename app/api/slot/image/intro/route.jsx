@@ -3,15 +3,15 @@ import { fonts } from "@/components/game/fonts";
 import { ImageResponse } from "next/og";
 
 const handleRequest = async (req) => {
-  const gameId = req.nextUrl.searchParams.get("gameId");
-  const game = await getGameWithId(gameId);
+  // const gameId = req.nextUrl.searchParams.get("gameId");
+  // const game = await getGameWithId(gameId);
 
   return new ImageResponse(
     (
       <div
         tw="flex flex-col items-center justify-around w-full h-full p-[3rem]"
         style={{
-          backgroundImage: `url(${process.env.APP_URL}/wrecked.jpeg)`,
+          // backgroundImage: `url(${process.env.APP_URL}/wrecked.jpeg)`,
           backgroundSize: "100% 100%",
         }}
       >
@@ -33,7 +33,7 @@ const handleRequest = async (req) => {
               lineHeight: "3rem",
             }}
           >
-            WRECKED - SLOT MACHINA
+            MEME MANIA!
           </p>
         </div>
         <div
@@ -54,8 +54,7 @@ const handleRequest = async (req) => {
               lineHeight: "3rem",
             }}
           >
-            Try your luck to win the jackpot of more than {game.base_prize}{" "}
-            {game.currency_symbol}
+            You are guaranteed to win something!!
           </p>
         </div>
       </div>

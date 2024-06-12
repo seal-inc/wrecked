@@ -15,7 +15,7 @@ export const Play = async ({ gameId, ctx }) => {
   const checkFollow = await checkFollower(ctx.message?.requesterFid, "kramer");
   const imageUrl = `${
     process.env.APP_URL
-  }/api/wrecked/image/play?id=${Date.now()}&gameId=${gameId}&playerId=${
+  }/api/slot/image/play?id=${Date.now()}&gameId=${gameId}&playerId=${
     ctx.message?.requesterFid
   }`;
 

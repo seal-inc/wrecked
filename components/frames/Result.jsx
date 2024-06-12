@@ -11,7 +11,7 @@ export const Result = async ({ ctx }) => {
   const { amountWon } = await executePlay(transaction_hash, game, playId);
   const imageUrl = `${
     process.env.APP_URL
-  }/api/wrecked/image/result?id=${Date.now()}&gameId=${gameId}&playId=${playId}&amountWon=${amountWon}`;
+  }/api/slot/image/result?id=${Date.now()}&gameId=${gameId}&playId=${playId}&amountWon=${amountWon}`;
 
   return {
     image: imageUrl,

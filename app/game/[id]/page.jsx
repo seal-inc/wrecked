@@ -3,10 +3,10 @@ import { fetchMetadata } from "frames.js/next";
 export async function generateMetadata({ params }) {
   const { id } = params;
   return {
-    title: "Wrecked",
+    title: "Slot",
     other: await fetchMetadata(
       new URL(
-        `/api/wrecked?id=${id}`,
+        `/api/slot?id=${id}`,
         process.env.APP_URL ? `${process.env.APP_URL}` : `http://localhost:3000`
       )
     ),

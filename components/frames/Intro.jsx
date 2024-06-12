@@ -5,14 +5,17 @@ export const Intro = async ({ gameId, ctx }) => {
   // Get the game with the specific id
   const imageUrl = `${
     process.env.APP_URL
-  }/api/wrecked/image/intro?id=${Date.now()}&gameId=${gameId}`;
+  }/api/slot/image/intro?id=${Date.now()}`;
 
   await fetchWithTimeout([imageUrl]);
   return {
     image: imageUrl,
     buttons: [
-      <Button action="post" target={{ query: { value: "Play", id: gameId } }}>
-        Play
+      <Button
+        action="post"
+        target={{ query: { value: "Deposit", id: gameId } }}
+      >
+        Click here to start
       </Button>,
     ],
     imageOptions: {

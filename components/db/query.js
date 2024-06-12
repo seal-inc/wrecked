@@ -27,6 +27,20 @@ export const createAndGetPlay = async (player, game) => {
   return data;
 };
 
+export const createSession = async (playerId, wallet, amount) => {
+  const { data, error } = await supabase
+    .from("sessions")
+    .insert([
+      { player: playerId, initial_deposit: amount, connected_wallet: wallet },
+    ])
+    .select()
+    .single();
+  if (error) {
+    throw error;
+  }
+  return data;
+};
+
 export const getPlayWithId = async (id) => {
   const { data, error } = await supabase
     .from("plays")
