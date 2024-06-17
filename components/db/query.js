@@ -41,6 +41,21 @@ export const createSession = async (playerId, wallet, amount) => {
   return data;
 };
 
+export const updatePlayerAccount = async (playerId, field, value) => {
+  const { data, error } = await supabase
+    .from("players")
+    .update({
+      [field]: value,
+    })
+    .eq("id", playerId)
+    .select()
+    .single();
+  if (error) {
+    throw error;
+  }
+  return data;
+};
+
 export const getPlayWithId = async (id) => {
   const { data, error } = await supabase
     .from("plays")

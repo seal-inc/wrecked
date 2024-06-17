@@ -7,7 +7,7 @@ const handleRequest = async (req) => {
       <div
         tw="flex flex-col items-center justify-around w-full h-full"
         style={{
-          backgroundImage: `url(${process.env.APP_URL}/artifacts/init.png)`,
+          backgroundImage: `url(${process.env.APP_URL}/artifacts/end.png)`,
           backgroundSize: "100% 100%",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",

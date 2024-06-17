@@ -1,21 +1,11 @@
-import {
-  createAndGetPlay,
-  getGameWithId,
-  getOrCreateUserWithId,
-} from "../db/query";
 import { Button } from "frames.js/next";
-import { checkFollower, fetchWithTimeout } from "../game/utils";
+import { fetchWithTimeout } from "../game/utils";
 import { fonts } from "../game/fonts";
 
-export const Play = async ({ gameId, ctx }) => {
-  // console.log("Play", gameId, ctx.message?.requesterFid);
-  const game = await getGameWithId(gameId);
-  const player = await getOrCreateUserWithId(ctx.message?.requesterFid);
-  const play = await createAndGetPlay(player, game);
-  const checkFollow = await checkFollower(ctx.message?.requesterFid, "kramer");
+export const Play = async ({ ctx, sessionId, playerId }) => {
   const imageUrl = `${
     process.env.APP_URL
-  }/api/slot/image/play?id=${Date.now()}&gameId=${gameId}&playerId=${
+  }/api/slot/image/play?id=${Date.now()}&&playerId=${
     ctx.message?.requesterFid
   }`;
 
@@ -23,41 +13,32 @@ export const Play = async ({ gameId, ctx }) => {
 
   return {
     image: imageUrl,
-    buttons: game
-      ? checkFollow
-        ? [
-            <Button
-              action="tx"
-              target={{
-                pathname: "/tx-data",
-                query: { id: gameId, playId: play.id },
-              }}
-              post_url={{
-                pathname: "/",
-                query: { id: gameId, playId: play.id },
-              }}
-            >
-              {`Buy ${game.base_cost_of_play} ${game.currency_symbol} ticket`}
-            </Button>,
-          ]
-        : [
-            <Button
-              action="link"
-              target="https://warpcast.com/~/channel/kramer"
-            >
-              Follow
-            </Button>,
-            <Button
-              action="post"
-              target={{ query: { value: "Play", id: gameId } }}
-            >
-              Try again
-            </Button>,
-          ]
-      : [],
+    buttons: [
+      <Button
+        action="post"
+        target={{ query: { value: "Outcome", amount: "1" } }}
+      >
+        1 USDC
+      </Button>,
+      <Button
+        action="post"
+        target={{ query: { value: "Outcome", amount: "5" } }}
+      >
+        5 USDC
+      </Button>,
+      <Button
+        action="post"
+        target={{ query: { value: "Outcome", amount: "10" } }}
+      >
+        10 USDC
+      </Button>,
+      <Button action="post" target={{ query: { value: "End" } }}>
+        END
+      </Button>,
+    ],
     imageOptions: {
       fonts: fonts,
-      aspectRatio: "1.91:1",
+      aspectRatio: "1:1",
     },
   };
 };

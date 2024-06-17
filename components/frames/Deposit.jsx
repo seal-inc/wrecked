@@ -1,19 +1,11 @@
-import {
-  createAndGetPlay,
-  getGameWithId,
-  getOrCreateUserWithId,
-} from "../db/query";
 import { Button } from "frames.js/next";
 import { fetchWithTimeout } from "../game/utils";
 import { fonts } from "../game/fonts";
 
-export const Deposit = async ({ gameId, ctx }) => {
-  const game = await getGameWithId(gameId);
-  const player = await getOrCreateUserWithId(ctx.message?.requesterFid);
-  const play = await createAndGetPlay(player, game);
+export const Deposit = async ({ ctx }) => {
   const imageUrl = `${
     process.env.APP_URL
-  }/api/slot/image/deposit?id=${Date.now()}&amp;gameId=${gameId}&playerId=${
+  }/api/slot/image/deposit?id=${Date.now()}&playerId=${
     ctx.message?.requesterFid
   }`;
 
@@ -21,40 +13,34 @@ export const Deposit = async ({ gameId, ctx }) => {
 
   return {
     image: imageUrl,
-    buttons: game
-      ? [
-          <Button
-            action="tx"
-            target={{
-              pathname: "/txdata",
-              query: { id: gameId, playId: play.id },
-            }}
-            post_url={{
-              pathname: "/",
-              query: { id: gameId, playId: play.id },
-            }}
-          >
-            {`Deposit 10 $USDC`}
-          </Button>,
-          <Button
-            action="tx"
-            target={{
-              pathname: "/txdata",
-              query: { id: gameId, playId: play.id },
-            }}
-            post_url={{
-              pathname: "/",
-              query: { id: gameId, playId: play.id },
-            }}
-          >
-            {`Enter custom amount`}
-          </Button>,
-        ]
-      : [],
+    buttons: [
+      <Button
+        action="tx"
+        target={{
+          pathname: "/txdata",
+        }}
+        post_url={{
+          pathname: "/",
+        }}
+      >
+        {`Deposit 10 $USDC`}
+      </Button>,
+      <Button
+        action="tx"
+        target={{
+          pathname: "/txdata",
+        }}
+        post_url={{
+          pathname: "/",
+        }}
+      >
+        {`Enter custom amount`}
+      </Button>,
+    ],
     textInput: " Enter custom $USDC to deposit ",
     imageOptions: {
       fonts: fonts,
-      aspectRatio: "1.91:1",
+      aspectRatio: "1:1",
     },
   };
 };
