@@ -2,7 +2,7 @@ import { Button } from "frames.js/next";
 import { fetchWithTimeout } from "../game/utils";
 import { fonts } from "../game/fonts";
 
-export const Deposit = async ({ ctx }) => {
+export const Deposit = async ({ ctx, message, sessionId }) => {
   const imageUrl = `${
     process.env.APP_URL
   }/api/slot/image/deposit?id=${Date.now()}&playerId=${
@@ -21,9 +21,12 @@ export const Deposit = async ({ ctx }) => {
         }}
         post_url={{
           pathname: "/",
+          query: {
+            sessionId,
+          },
         }}
       >
-        {`Deposit 10 $USDC`}
+        {`10 USDC`}
       </Button>,
       <Button
         action="tx"
@@ -32,12 +35,23 @@ export const Deposit = async ({ ctx }) => {
         }}
         post_url={{
           pathname: "/",
+          query: {
+            sessionId,
+          },
         }}
       >
-        {`Enter custom amount`}
+        {`Custom USDC`}
+      </Button>,
+      <Button
+        action="post"
+        target={{
+          query: { value: "Play", sessionId },
+        }}
+      >
+        {`Skip ⏩`}
       </Button>,
     ],
-    textInput: " Enter custom $USDC to deposit ",
+    textInput: message ? " " + message : " Enter custom $USDC to deposit ",
     imageOptions: {
       fonts: fonts,
       aspectRatio: "1:1",

@@ -1,12 +1,10 @@
 import { Button } from "frames.js/next";
 import { fonts } from "../game/fonts";
 
-export const End = async ({ ctx }) => {
+export const End = async ({ ctx, sessionId }) => {
   // Get the game with the specific id
   const playId = ctx.searchParams.playId;
-  const imageUrl = `${
-    process.env.APP_URL
-  }/api/slot/image/end?id=${Date.now()}&playId=${playId}`;
+  const imageUrl = `${process.env.APP_URL}/api/slot/image/end?id=${Date.now()}`;
 
   return {
     image: imageUrl,
@@ -14,7 +12,7 @@ export const End = async ({ ctx }) => {
       <Button
         action="post"
         target={{
-          query: { value: "Play" },
+          query: { value: "Play", sessionId },
         }}
       >
         Yes
@@ -22,7 +20,7 @@ export const End = async ({ ctx }) => {
       <Button
         action="post"
         target={{
-          query: { value: "Summary" },
+          query: { value: "Summary", sessionId },
         }}
       >
         No

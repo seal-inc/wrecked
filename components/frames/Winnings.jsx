@@ -1,5 +1,6 @@
 import { Button } from "frames.js/next";
 import { fonts } from "../game/fonts";
+import { getPlayWithId } from "../db/query";
 
 export const Winnings = async ({ ctx }) => {
   // Get the game with the specific id
@@ -7,7 +8,9 @@ export const Winnings = async ({ ctx }) => {
   const playId = ctx.searchParams.playId;
   const imageUrl = `${
     process.env.APP_URL
-  }/api/slot/image/winnings?id=${Date.now()}&playId=${playId}&sessionId=${sessionId}`;
+  }/api/slot/image/winnings?id=${Date.now()}&playId=${playId}`;
+
+  const play = await getPlayWithId(playId);
 
   return {
     image: imageUrl,
@@ -15,7 +18,7 @@ export const Winnings = async ({ ctx }) => {
       <Button
         action="post"
         target={{
-          query: { value: "Play", after: "dump" },
+          query: { value: "Play", previousAction: "dump", sessionId, playId },
         }}
       >
         Dump
@@ -23,7 +26,7 @@ export const Winnings = async ({ ctx }) => {
       <Button
         action="post"
         target={{
-          query: { value: "Play", after: "hodl" },
+          query: { value: "Play", previousAction: "hodl", sessionId, playId },
         }}
       >
         HODL

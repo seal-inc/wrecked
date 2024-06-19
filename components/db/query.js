@@ -1,37 +1,26 @@
 import { getUserDataForFid } from "frames.js";
 import { supabase } from "./server";
 
-export const getGameWithId = async (id) => {
-  const { data, error } = await supabase
-    .from("games")
-    .select("*")
-    .eq("id", id)
-    .single();
-
-  if (error) {
-    throw error;
-  }
-
-  return data;
-};
-
-export const createAndGetPlay = async (player, game) => {
+export const registerPlay = async (
+  playerId,
+  sessionId,
+  playAmount,
+  combination,
+  totalWinnings,
+  payoutToken,
+  payoutTokenAmount
+) => {
   const { data, error } = await supabase
     .from("plays")
-    .insert([{ player: player.id, game: game.id }])
-    .select()
-    .single();
-  if (error) {
-    throw error;
-  }
-  return data;
-};
-
-export const createSession = async (playerId, wallet, amount) => {
-  const { data, error } = await supabase
-    .from("sessions")
     .insert([
-      { player: playerId, initial_deposit: amount, connected_wallet: wallet },
+      {
+        player: playerId,
+        session: sessionId,
+        combination,
+        play_amount_usdc: playAmount,
+        won_amount_usdc: totalWinnings,
+        award_token_balance: { [payoutToken]: payoutTokenAmount },
+      },
     ])
     .select()
     .single();
@@ -41,12 +30,48 @@ export const createSession = async (playerId, wallet, amount) => {
   return data;
 };
 
-export const updatePlayerAccount = async (playerId, field, value) => {
+export const getSessionWithId = async (id) => {
+  const { data, error } = await supabase
+    .from("sessions")
+    .select("*")
+    .eq("id", id)
+    .single();
+
+  if (error) {
+    throw error;
+  }
+  return data;
+};
+
+export const createSession = async (playerId) => {
+  const { data, error } = await supabase
+    .from("sessions")
+    .insert([{ player: playerId }])
+    .select()
+    .single();
+  if (error) {
+    throw error;
+  }
+  return data;
+};
+
+export const updateSession = async (sessionId, newSessionInfo) => {
+  const { data, error } = await supabase
+    .from("sessions")
+    .update(newSessionInfo)
+    .eq("id", sessionId)
+    .select()
+    .single();
+  if (error) {
+    throw error;
+  }
+  return data;
+};
+
+export const updatePlayerAccount = async (playerId, newPlayerInfo) => {
   const { data, error } = await supabase
     .from("players")
-    .update({
-      [field]: value,
-    })
+    .update(newPlayerInfo)
     .eq("id", playerId)
     .select()
     .single();
@@ -70,49 +95,11 @@ export const getPlayWithId = async (id) => {
   return data;
 };
 
-export const updateGameWinner = async (gameId, winner) => {
-  const { data, error } = await supabase
-    .from("games")
-    .update({ winner })
-    .eq("id", gameId)
-    .is("winner", null)
-    .select()
-    .single();
-  if (error) {
-    throw error;
-  }
-  return data;
-};
-
-export const updateGameBalance = async (
-  gameId,
-  base_cost_of_play,
-  current_prize
-) => {
-  const { data, error } = await supabase
-    .from("games")
-    .update({ current_prize: current_prize + base_cost_of_play * 0.5 })
-    .eq("id", gameId)
-    .select()
-    .single();
-  if (error) {
-    throw error;
-  }
-  return data;
-};
-
-export const updatePlay = async (
-  playId,
-  transaction_hash,
-  has_won,
-  amount_won,
-  wallet
-) => {
-  console.log({ playId, transaction_hash, has_won, amount_won, wallet });
+export const updatePlayWithId = async (id, newPlayerInfo) => {
   const { data, error } = await supabase
     .from("plays")
-    .update({ transaction_hash, has_won, amount_won, wallet })
-    .eq("id", playId)
+    .update(newPlayerInfo)
+    .eq("id", id)
     .select()
     .single();
   if (error) {

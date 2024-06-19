@@ -27,6 +27,12 @@ const payoutTable = {
 // Symbol mapping
 const symbolMapping = { 1: "TYBG", 2: "CHAPTER13", 3: "HIGHER", 4: "DEGEN" };
 
+const tokenIdsMapping = {
+  TYBG: "base-god",
+  HIGHER: "higher",
+  DEGEN: "degen-base",
+};
+
 export async function executePlay(playAmount) {
   const [reel1Result, reel2Result, reel3Result] = [
     getRandomNumber(reel1),
@@ -57,7 +63,35 @@ export async function executePlay(playAmount) {
   const totalWinnings = payoutMultiple * playAmount;
 
   // TODO: Select token to payout in
-  // TODO: Compute the amount based on pricing data
 
-  return { combination, totalWinnings };
+  const tokens = Object.keys(tokenIdsMapping);
+  const randomIndex = Math.floor(Math.random() * tokens.length);
+  const payoutToken = tokens[randomIndex];
+  const tokenId = tokenIdsMapping[payoutToken];
+
+  // Fetch token price from Coingecko API
+  const tokenPrice = await fetchTokenPrice(tokenId);
+
+  // Use the token price for further processing
+
+  return {
+    combination,
+    totalWinnings,
+    payoutToken,
+    payoutTokenAmount: totalWinnings / tokenPrice,
+  };
+}
+async function fetchTokenPrice(tokenId) {
+  const response = await fetch(
+    `https://api.coingecko.com/api/v3/coins/${tokenId}?market_data=true`,
+    {
+      headers: {
+        accept: "application/json",
+        "x-cg-demo-api-key": process.env.COINGECKO_API_KEY,
+      },
+    }
+  );
+  const data = await response.json();
+  const tokenPrice = data.market_data.current_price.usd;
+  return tokenPrice;
 }
