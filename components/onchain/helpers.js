@@ -11,6 +11,7 @@ import { metadata as degenMetadata } from "./contracts/degen/metadata";
 import { metadata as higherMetadata } from "./contracts/higher/metadata";
 import { metadata as tybgMetadata } from "./contracts/tybg/metadata";
 import { publicClient } from "./clients/publicClient";
+import { client } from "./clients/slotHotWalletClient";
 
 const getTokenDetails = (token) => {
   switch (token) {
@@ -83,12 +84,12 @@ export const parseDepositTransactionData = async (transactionHash) => {
   };
 };
 
-export const sendToken = async (token, amount) => {
-  const account = privateKeyToAccount(process.env.WALLET_PRIVATE_KEY);
+export const sendToken = async (token, amount, address) => {
+  const account = privateKeyToAccount(process.env.SLOT_HOT_ADDRESS_PRIVATE_KEY);
   const tokenDetails = getTokenDetails(token);
 
   const decimals = tokenDetails.metadata.decimals;
-  const amountToSendInDecimals = amount * 10 ** decimals;
+  const amountToSendInDecimals = Math.floor(amount * 10 ** decimals);
 
   const calldata = encodeFunctionData({
     abi: tokenDetails.abi,

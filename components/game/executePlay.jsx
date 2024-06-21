@@ -25,12 +25,12 @@ const payoutTable = {
 };
 
 // Symbol mapping
-const symbolMapping = { 1: "TYBG", 2: "CHAPTER13", 3: "HIGHER", 4: "DEGEN" };
+const symbolMapping = { 1: "tybg", 2: "chapter13", 3: "higher", 4: "degen" };
 
 const tokenIdsMapping = {
-  TYBG: "base-god",
-  HIGHER: "higher",
-  DEGEN: "degen-base",
+  tybg: "base-god",
+  higher: "higher",
+  degen: "degen-base",
 };
 
 export async function executePlay(playAmount) {
@@ -78,7 +78,7 @@ export async function executePlay(playAmount) {
     combination,
     totalWinnings,
     payoutToken,
-    payoutTokenAmount: totalWinnings / tokenPrice,
+    payoutTokenAmount: Math.floor(totalWinnings / tokenPrice),
   };
 }
 async function fetchTokenPrice(tokenId) {

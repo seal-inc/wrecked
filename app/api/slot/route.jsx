@@ -15,6 +15,7 @@ import {
   updatePlayerAccount,
   updateSession,
 } from "@/components/db/query";
+import { Summary } from "@/components/frames/Summary";
 
 const handleRequest = frames(async (ctx) => {
   let player;
@@ -77,32 +78,36 @@ const handleRequest = frames(async (ctx) => {
               ? player.play_token_balances["usdc"] || 0
               : 0),
         },
+        wallet_address: from,
       });
       return Play({ ctx, sessionId });
     } else if (action === "Deposit") {
-      return Deposit({ ctx, sessionId });
+      const playAmountBalance = player?.play_token_balances["usdc"];
+      return Deposit({
+        ctx,
+        sessionId,
+        message: `Balance ${playAmountBalance || 0} USDC.`,
+      });
     } else if (action === "Play") {
       return Play({ ctx, sessionId });
     } else if (action === "Outcome") {
       const playAmountBalance = player?.play_token_balances["usdc"];
-      if (playAmountBalance <= 0) {
+      if (
+        playAmountBalance <= 0 ||
+        playAmountBalance < Number(ctx.searchParams.amount)
+      ) {
         return Deposit({
           ctx,
-          message: `🛑🛑 You only have ${
-            playAmountBalance || 0
-          } USDC.🛑🛑 Deposit to play! 🛑🛑`,
-        });
-      } else if (playAmountBalance < ctx.searchParams.amount) {
-        return Deposit({
-          ctx,
-          message: `🛑🛑 You only have ${playAmountBalance} USDC. Deposit more to play! 🛑🛑`,
+          message: `Balance: ${playAmountBalance} USDC (deposit more)`,
         });
       }
-      return Outcome({ ctx });
+      return Outcome({ ctx, sessionId });
     } else if (action === "End") {
-      return End({ ctx });
+      return End({ ctx, sessionId });
     } else if (action === "Winnings") {
-      return Winnings({ ctx });
+      return Winnings({ ctx, sessionId });
+    } else if (action === "Summary") {
+      return Summary({ ctx, sessionId });
     } else {
       return Intro({ ctx });
     }
