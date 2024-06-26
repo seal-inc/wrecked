@@ -1,13 +1,9 @@
 import { Button } from "frames.js/next";
-import { fetchWithTimeout } from "../game/utils";
 import { fonts } from "../game/fonts";
 
 export const Intro = async ({ ctx }) => {
-  const imageUrl = `${
-    process.env.APP_URL
-  }/api/slot/image/intro?id=${Date.now()}`;
+  const imageUrl = `${process.env.APP_URL}/artifacts/init.gif`;
 
-  await fetchWithTimeout([imageUrl]);
   return {
     image: imageUrl,
     buttons: [

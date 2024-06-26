@@ -4,7 +4,7 @@ import { fonts } from "../game/fonts";
 export const End = async ({ ctx, sessionId }) => {
   // Get the game with the specific id
   const playId = ctx.searchParams.playId;
-  const imageUrl = `${process.env.APP_URL}/api/slot/image/end?id=${Date.now()}`;
+  const imageUrl = `${process.env.APP_URL}/artifacts/end.gif`;
 
   return {
     image: imageUrl,

@@ -1,15 +1,8 @@
 import { Button } from "frames.js/next";
-import { fetchWithTimeout } from "../game/utils";
 import { fonts } from "../game/fonts";
 
 export const Deposit = async ({ ctx, message, sessionId }) => {
-  const imageUrl = `${
-    process.env.APP_URL
-  }/api/slot/image/deposit?id=${Date.now()}&playerId=${
-    ctx.message?.requesterFid
-  }`;
-
-  await fetchWithTimeout([imageUrl]);
+  const imageUrl = `${process.env.APP_URL}/artifacts/deposit.gif`;
 
   return {
     image: imageUrl,

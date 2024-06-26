@@ -7,19 +7,26 @@ const handleRequest = async (req) => {
       <div
         tw="flex flex-col items-center justify-around w-full h-full"
         style={{
-          backgroundImage: `url(${process.env.APP_URL}/artifacts/init.png)`,
+          backgroundImage: `url(${process.env.APP_URL}/artifacts/init.gif)`,
           backgroundSize: "100% 100%",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
         }}
-      ></div>
+      >
+        <img
+          src={`${process.env.APP_URL}/artifacts/DEGEN_token.svg`}
+          height={100}
+          width={100}
+          alt="description"
+        />
+      </div>
     ),
     {
       headers: {
+        type: "image/gif",
         key: "Cache-Control",
         value: "public, max-age=1, must-revalidate",
       },
-
       fonts: fonts,
       height: 1200,
       width: 1200,

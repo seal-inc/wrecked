@@ -82,7 +82,9 @@ const handleRequest = frames(async (ctx) => {
       });
       return Play({ ctx, sessionId });
     } else if (action === "Deposit") {
-      const playAmountBalance = player?.play_token_balances["usdc"];
+      const playAmountBalance =
+        Math.round(Number(player?.play_token_balances["usdc"] || 0) * 100) /
+        100;
       return Deposit({
         ctx,
         sessionId,
@@ -91,7 +93,9 @@ const handleRequest = frames(async (ctx) => {
     } else if (action === "Play") {
       return Play({ ctx, sessionId });
     } else if (action === "Outcome") {
-      const playAmountBalance = player?.play_token_balances["usdc"];
+      const playAmountBalance =
+        Math.round(Number(player?.play_token_balances["usdc"] || 0) * 100) /
+        100;
       if (
         playAmountBalance <= 0 ||
         playAmountBalance < Number(ctx.searchParams.amount)
