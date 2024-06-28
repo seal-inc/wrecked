@@ -5,16 +5,14 @@ import {
   getSessionWithId,
   updatePlayerAccount,
 } from "../db/query";
-import { sendToken } from "../onchain/helpers";
+import { getTokenDetails } from "../onchain/helpers";
+import { client } from "../onchain/clients/slotHotWalletClient";
+import { encodePacked, keccak256 } from "viem";
+import { randomBytes } from "ethers";
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
-
-console.log("Hello");
-sleep(2000).then(() => {
-  console.log("World!");
-});
 
 export const Summary = async ({ ctx, sessionId }) => {
   // Get the game with the specific id
@@ -25,51 +23,71 @@ export const Summary = async ({ ctx, sessionId }) => {
 
   const player = await getOrCreateUserWithId(ctx.message?.requesterFid);
   const session = await getSessionWithId(sessionId);
+  const MEMEMANIA_CONTRACT = process.env.MEMEMANIA_CONTRACT;
+  const generateClaimRewards = async (player) => {
+    const awardTokenBalances = player?.award_token_balances;
+    const playTokenBalances = player?.play_token_balances;
+    const tokenBalances = { ...awardTokenBalances, ...playTokenBalances };
+    if (!tokenBalances) return;
 
-  console.log({ player, session });
+    const tokens = Object.keys(awardTokenBalances).concat(
+      Object.keys(playTokenBalances)
+    );
+    console.log({ tokens });
+    const claimRewards = [];
 
-  const awardTokenBalances = player?.award_token_balances;
-  if (awardTokenBalances) {
-    const tokens = Object.keys(awardTokenBalances);
     for (const token of tokens) {
-      if (awardTokenBalances[token])
-        await sendToken(
-          token,
-          awardTokenBalances[token],
-          player.wallet_address
-        );
-      await sleep(2000);
-    }
-  }
+      const tokenMetadata = getTokenDetails(token);
+      if (tokenBalances[token]) {
+        const reward = {
+          amount: Math.floor(
+            tokenBalances[token] * 10 ** tokenMetadata.metadata.decimals
+          ),
+          tokenType: tokenMetadata.tokenType, // Assuming getTokenDetails provides tokenType
+          nonce: "0x" + Buffer.from(randomBytes(32)).toString("hex"),
+        };
 
-  // const playTokenBalances = player?.play_token_balances;
-  // if (playTokenBalances) {
-  //   const tokens = Object.keys(playTokenBalances);
-  //   for (const token of tokens) {
-  //     if (playTokenBalances[token])
-  //       await sendToken(token, playTokenBalances[token], player.wallet_address);
-  //   }
+        const messageHash = keccak256(
+          encodePacked(
+            ["address", "uint256", "uint8", "bytes32"],
+            [
+              player.wallet_address,
+              reward.amount,
+              reward.tokenType,
+              reward.nonce,
+            ]
+          )
+        );
+
+        const signature = await client.signMessage({ message: messageHash });
+        claimRewards.push({
+          ...reward,
+          signature,
+        });
+      }
+    }
+    return claimRewards;
+  };
+
+  const rewardClaims = await generateClaimRewards(player);
+
+  console.log(rewardClaims);
+  // const updatedPlayTokenBalances = {};
+  // const updatedAwardTokenBalances = {};
+
+  // // Update play_token_balances
+  // for (const token in player.play_token_balances) {
+  //   updatedPlayTokenBalances[token] = 0;
   // }
 
-  const updatedPlayTokenBalances = {};
-  const updatedAwardTokenBalances = {};
-
-  // Update play_token_balances
-  for (const token in player.play_token_balances) {
-    updatedPlayTokenBalances[token] = 0;
-  }
-
-  // Update award_token_balances
-  for (const token in player.award_token_balances) {
-    updatedAwardTokenBalances[token] = 0;
-  }
-
-  const playerhere = await updatePlayerAccount(player.id, {
-    play_token_balances: updatedPlayTokenBalances,
-    award_token_balances: updatedAwardTokenBalances,
-  });
-
-  console.log({ playerhere });
+  // // Update award_token_balances
+  // for (const token in player.award_token_balances) {
+  //   updatedAwardTokenBalances[token] = 0;
+  // }
+  // await updatePlayerAccount(player.id, {
+  //   play_token_balances: updatedPlayTokenBalances,
+  //   award_token_balances: updatedAwardTokenBalances,
+  // });
 
   return {
     image: imageUrl,

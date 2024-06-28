@@ -9,9 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@frames.js/render": "^0.2.15",
     "@supabase/supabase-js": "^2.42.7",
     "axios": "^1.6.8",
     "canvas": "^2.11.2",
+    "ethers": "^6.13.1",
     "frames.js": "^0.16.6",
     "gif-encoder": "^0.7.2",
     "gif-frames": "^1.0.1",

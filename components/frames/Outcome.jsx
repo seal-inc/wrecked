@@ -43,8 +43,6 @@ export const Outcome = async ({ ctx, sessionId }) => {
     // },
   });
 
-  console.log({ play });
-
   const imageUrl = `${
     process.env.APP_URL
   }/api/slot/image/outcome?id=${Date.now()}&playId=${play.id}`;

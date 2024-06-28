@@ -1,22 +1,48 @@
-export async function generateMetadata() {
-  return {
-    title: "Wrecked - Get Wrecked!",
-    // provide a full URL to your /frames endpoint
-  };
-}
+"use client";
+import { FrameUI, fallbackFrameContext, FrameContext } from "@frames.js/render";
+import { signFrameAction, FarcasterSigner } from "@frames.js/render/farcaster";
+import { FrameImageNext } from "@frames.js/render/next";
+import { FrameButton } from "frames.js";
+import { useFrame } from "@frames.js/render/use-frame";
 
-export default function Home() {
+export default function Page() {
+  // TODO: replace with your farcaster signer
+  const farcasterSigner = {
+    fid: 1,
+    status: "approved",
+    publicKey:
+      "0x00000000000000000000000000000000000000000000000000000000000000000",
+    privateKey:
+      "0x00000000000000000000000000000000000000000000000000000000000000000",
+  };
+
+  const frameState = useFrame({
+    // replace with your frame url
+    homeframeUrl: "http://localhost:3000/mememania",
+    // corresponds to the name of the route for POST in step 3
+    frameActionProxy: "/frames",
+    connectedAddress: undefined,
+    // corresponds to the name of the route for GET in step 3
+    frameGetProxy: "/frames",
+    frameContext: fallbackFrameContext,
+    // map to your identity if you have one
+    signerState: {
+      hasSigner: farcasterSigner !== undefined,
+      signer: farcasterSigner,
+      onSignerlessFramePress: () => {
+        // Only run if `hasSigner` is set to `false`
+        // This is a good place to throw an error or prompt the user to login
+        alert(
+          "A frame button was pressed without a signer. Perhaps you want to prompt a login"
+        );
+      },
+      signFrameAction: signFrameAction,
+    },
+  });
+
   return (
-    <main className="flex min-h-screen flex-col items-center bg-white justify-around p-24">
-      <p className="text-[5rem] text-black">Get Wrecked!</p>
-      <div
-        className="z-10 max-w-5xl w-full h-[400px] justify-center lg:flex"
-        style={{
-          backgroundImage: `url(${process.env.APP_URL}/wrecked-2.jpg)`,
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-        }}
-      ></div>
-    </main>
+    <div className="w-[400px]">
+      <FrameUI frameState={frameState} theme={{}} FrameImage={FrameImageNext} />
+    </div>
   );
 }

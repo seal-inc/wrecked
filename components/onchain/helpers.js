@@ -13,27 +13,31 @@ import { metadata as tybgMetadata } from "./contracts/tybg/metadata";
 import { publicClient } from "./clients/publicClient";
 import { client } from "./clients/slotHotWalletClient";
 
-const getTokenDetails = (token) => {
+export const getTokenDetails = (token) => {
   switch (token) {
     case "usdc":
       return {
         metadata: usdcMetadata,
         abi: usdcABI,
+        tokenType: 4,
       };
     case "degen":
       return {
         metadata: degenMetadata,
         abi: degenABI,
+        tokenType: 1,
       };
     case "higher":
       return {
         metadata: higherMetadata,
         abi: higherABI,
+        tokenType: 2,
       };
     case "tybg":
       return {
         metadata: tybgMetadata,
         abi: tybgABI,
+        tokenType: 3,
       };
     default:
       throw new Error("Invalid token");
@@ -43,7 +47,6 @@ const getTokenDetails = (token) => {
 export const getDepositTxData = (amount) => {
   const decimals = usdcMetadata.decimals;
   const amountToSendInDecimals = amount * 10 ** decimals;
-  console.log({ usdcABI });
   const calldata = encodeFunctionData({
     abi: usdcABI,
     functionName: "transfer",
