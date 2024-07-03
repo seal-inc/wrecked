@@ -18,9 +18,16 @@ export const End = async ({ ctx, sessionId }) => {
         Yes
       </Button>,
       <Button
-        action="post"
+        action="tx"
         target={{
-          query: { value: "Summary", sessionId },
+          pathname: "/exit",
+        }}
+        post_url={{
+          pathname: "/",
+          query: {
+            value: "Summary",
+            sessionId,
+          },
         }}
       >
         No

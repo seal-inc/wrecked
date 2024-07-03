@@ -15,6 +15,7 @@ export const Deposit = async ({ ctx, message, sessionId }) => {
         post_url={{
           pathname: "/",
           query: {
+            value: "Deposit",
             sessionId,
           },
         }}
@@ -29,6 +30,7 @@ export const Deposit = async ({ ctx, message, sessionId }) => {
         post_url={{
           pathname: "/",
           query: {
+            value: "Deposit",
             sessionId,
           },
         }}

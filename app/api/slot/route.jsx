@@ -5,6 +5,7 @@ import { Outcome } from "@/components/frames/Outcome";
 import { End } from "@/components/frames/End";
 import { Deposit } from "@/components/frames/Deposit";
 import { Winnings } from "@/components/frames/Winnings";
+import { Summary } from "@/components/frames/Summary";
 import { parseDepositTransactionData } from "@/components/onchain/helpers";
 import {
   createSession,
@@ -15,7 +16,6 @@ import {
   updatePlayerAccount,
   updateSession,
 } from "@/components/db/query";
-import { Summary } from "@/components/frames/Summary";
 
 const handleRequest = frames(async (ctx) => {
   let player;
@@ -63,7 +63,7 @@ const handleRequest = frames(async (ctx) => {
       }
     }
 
-    if (transactionHash) {
+    if (transactionHash && action === "Deposit") {
       const { from, to, nominalValueInUSDC } =
         await parseDepositTransactionData(transactionHash);
       await updateSession(sessionId, {
@@ -83,8 +83,11 @@ const handleRequest = frames(async (ctx) => {
       return Play({ ctx, sessionId });
     } else if (action === "Deposit") {
       const playAmountBalance =
-        Math.round(Number(player?.play_token_balances["usdc"] || 0) * 100) /
-        100;
+        Math.round(
+          Number(
+            player?.play_token_balances ? player.play_token_balances["usdc"] : 0
+          ) * 100
+        ) / 100;
       return Deposit({
         ctx,
         sessionId,
@@ -94,8 +97,11 @@ const handleRequest = frames(async (ctx) => {
       return Play({ ctx, sessionId });
     } else if (action === "Outcome") {
       const playAmountBalance =
-        Math.round(Number(player?.play_token_balances["usdc"] || 0) * 100) /
-        100;
+        Math.round(
+          Number(
+            player?.play_token_balances ? player.play_token_balances["usdc"] : 0
+          ) * 100
+        ) / 100;
       if (
         playAmountBalance <= 0 ||
         playAmountBalance < Number(ctx.searchParams.amount)
@@ -111,7 +117,7 @@ const handleRequest = frames(async (ctx) => {
     } else if (action === "Winnings") {
       return Winnings({ ctx, sessionId });
     } else if (action === "Summary") {
-      return Summary({ ctx, sessionId });
+      return Summary({ ctx, sessionId, transactionHash });
     } else {
       return Intro({ ctx });
     }
