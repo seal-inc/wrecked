@@ -5,7 +5,7 @@ export async function generateMetadata({ params }) {
     title: "Slot",
     other: await fetchMetadata(
       new URL(
-        `/api/slot`,
+        `/mememania`,
         process.env.APP_URL ? `${process.env.APP_URL}` : `http://localhost:3000`
       )
     ),
