@@ -3,15 +3,8 @@ import * as path from "node:path";
 
 export const runtime = "nodejs";
 
-const PressStart2PRegularFont = fs.readFile(
-  path.join(
-    path.resolve(process.cwd(), "public/fonts"),
-    "PressStart2P-Regular.ttf"
-  )
-);
-
-const MonotonRegularFont = fs.readFile(
-  path.join(path.resolve(process.cwd(), "public/fonts"), "Monoton-Regular.ttf")
+const PixeledFont = fs.readFile(
+  path.join(path.resolve(process.cwd(), "public/fonts"), "Pixeled.ttf")
 );
 
 const AudiowideRegularFont = fs.readFile(
@@ -22,16 +15,11 @@ const AudiowideRegularFont = fs.readFile(
 );
 
 export const fonts = await Promise.all([
-  // {
-  //   name: "Press Start 2P",
-  //   data: await PressStart2PRegularFont,
-  //   weight: 400,
-  // },
-  // {
-  //   name: "Monoton",
-  //   data: await MonotonRegularFont,
-  //   weight: 400,
-  // },
+  {
+    name: "Pixeled",
+    data: await PixeledFont,
+    weight: 400,
+  },
   {
     name: "Audiowide",
     data: await AudiowideRegularFont,

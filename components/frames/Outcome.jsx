@@ -6,6 +6,7 @@ import {
   registerPlay,
   updatePlayerAccount,
 } from "../db/query";
+import { fetchWithTimeout } from "../game/utils";
 
 export const Outcome = async ({ ctx, sessionId }) => {
   const playAmount = ctx.searchParams.amount;
@@ -34,18 +35,13 @@ export const Outcome = async ({ ctx, sessionId }) => {
     play_token_balances: {
       ["usdc"]: player.play_token_balances["usdc"] - playAmount,
     },
-    // award_token_balances: {
-    //   ...player.award_token_balances,
-    //   [payoutToken]:
-    //     (player.award_token_balances
-    //       ? player.award_token_balances[payoutToken] || 0
-    //       : 0) + payoutTokenAmount,
-    // },
   });
 
   const imageUrl = `${
     process.env.APP_URL
-  }/api/slot/image/outcome?id=${Date.now()}&playId=${play.id}`;
+  }/api/slot/image/outcome?id=${Date.now()}&&playId=${play.id}`;
+
+  await fetchWithTimeout([imageUrl]);
 
   return {
     image: imageUrl,
@@ -56,7 +52,7 @@ export const Outcome = async ({ ctx, sessionId }) => {
           query: { value: "Winnings", playId: play.id, sessionId },
         }}
       >
-        Check your winnings
+        🤑🤑🤑 You won! 🤑🤑🤑
       </Button>,
     ],
     imageOptions: {
