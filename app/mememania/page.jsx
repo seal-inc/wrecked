@@ -7,14 +7,13 @@ export async function generateMetadata({ params }) {
       other: await fetchMetadata(
         new URL(
           `/api/slot`,
-          process.env.APP_URL
-            ? `${process.env.APP_URL}`
-            : `http://localhost:3000`
+          process.env.VERCEL_URL
+            ? `https://${process.env.VERCEL_URL}`
+            : "http://localhost:3000"
         )
       ),
     };
   } catch (error) {
-    console.error(error);
     return {
       title: "Slot",
     };
