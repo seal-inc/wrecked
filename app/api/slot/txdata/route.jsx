@@ -3,7 +3,7 @@ import { getDepositTxData } from "@/components/onchain/helpers";
 import { frames } from "../frames";
 import { error, transaction } from "frames.js/core";
 
-export const POST = frames(async (ctx) => {
+const handleRequest = frames(async (ctx) => {
   const { inputText } = ctx.message;
   const pressedButton = ctx.pressedButton;
   let amount;
@@ -20,3 +20,6 @@ export const POST = frames(async (ctx) => {
   const txdata = getDepositTxData(amount);
   return transaction(txdata);
 });
+
+export const GET = handleRequest;
+export const POST = handleRequest;

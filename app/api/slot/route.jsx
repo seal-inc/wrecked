@@ -119,11 +119,10 @@ const handleRequest = frames(async (ctx) => {
     } else if (action === "Summary") {
       return Summary({ ctx, sessionId, transactionHash });
     } else {
-      return Intro({ ctx });
+      return Intro({});
     }
   } catch (error) {
-    console.error(error);
-    return error("Something went wrong! Try again later");
+    return Intro({});
   }
 });
 

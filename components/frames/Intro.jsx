@@ -1,7 +1,7 @@
 import { Button } from "frames.js/next";
 import { fonts } from "../game/fonts";
 
-export const Intro = async ({ ctx }) => {
+export const Intro = async ({}) => {
   const imageUrl = `${process.env.APP_URL}/artifacts/init.gif`;
 
   return {
