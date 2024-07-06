@@ -1,15 +1,24 @@
 import { fetchMetadata } from "frames.js/next";
 
 export async function generateMetadata({ params }) {
-  return {
-    title: "Slot",
-    other: await fetchMetadata(
-      new URL(
-        `/mememania`,
-        process.env.APP_URL ? `${process.env.APP_URL}` : `http://localhost:3000`
-      )
-    ),
-  };
+  try {
+    return {
+      title: "Slot",
+      other: await fetchMetadata(
+        new URL(
+          `/api/slot`,
+          process.env.APP_URL
+            ? `${process.env.APP_URL}`
+            : `http://localhost:3000`
+        )
+      ),
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      title: "Slot",
+    };
+  }
 }
 
 export default function Home() {
