@@ -7,8 +7,8 @@ export async function generateMetadata({ params }) {
       other: await fetchMetadata(
         new URL(
           `/api/slot`,
-          process.env.VERCEL_URL
-            ? `https://${process.env.VERCEL_URL}`
+          process.env.APP_URL
+            ? `${process.env.APP_URL}`
             : "http://localhost:3000"
         )
       ),
