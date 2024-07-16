@@ -21,7 +21,7 @@ export const Winnings = async ({ ctx }) => {
           query: { value: "Play", previousAction: "dump", sessionId, playId },
         }}
       >
-        Dump
+        {`Dump for ${play.won_amount_usdc} USDC`}
       </Button>,
       <Button
         action="post"

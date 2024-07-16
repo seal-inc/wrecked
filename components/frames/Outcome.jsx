@@ -52,7 +52,7 @@ export const Outcome = async ({ ctx, sessionId }) => {
           query: { value: "Winnings", playId: play.id, sessionId },
         }}
       >
-        🤑🤑🤑 You won! 🤑🤑🤑
+        👀 the prize! 🤑🤑🤑
       </Button>,
     ],
     imageOptions: {

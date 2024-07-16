@@ -5,17 +5,17 @@ import { ImageResponse } from "next/og";
 const TokenBalance = ({ token, currency }) => {
   const balance = (currency || "") + Number(token || 0).toLocaleString();
   return (
-    <span
-      tw={`flex text-blue ${
-        balance.length > 6
-          ? "text-xs"
-          : balance.length > 4
-          ? "text-lg"
-          : "text-2xl"
+    <div
+      tw={`flex text-[#045BB0] justify-center ${
+        balance.length > 8
+          ? "text-xl"
+          : balance.length > 6
+          ? "text-3xl"
+          : "text-4xl"
       }`}
     >
       {balance}
-    </span>
+    </div>
   );
 };
 
@@ -36,17 +36,18 @@ const handleRequest = async (req) => {
           backgroundPosition: "center",
         }}
       >
-        <div tw="flex flex-row justify-around mb-16 w-full">
+        <div tw="flex flex-row justify-around mb-4 w-full">
           <div
-            tw="flex items-center justify-end w-[60] h-[25] bg-black bg-opacity-50 rounded-lg"
+            tw="flex items-center justify-end w-[400px] h-[150px] bg-black bg-opacity-50 rounded-lg"
             style={{
               backgroundImage: `url(${process.env.APP_URL}/artifacts/icons-play/GAS TANK_button.svg)`,
-              backgroundsize: "100 200",
+              backgroundSize: "100% 100%",
+              backgroundRepeat: "no-repeat",
             }}
           >
             <div tw="flex mr-8">
               <TokenBalance
-                token={player?.play_token_balances?.usdc}
+                token={player.play_token_balances["usdc"]}
                 currency={"$"}
               />
             </div>
@@ -55,10 +56,11 @@ const handleRequest = async (req) => {
             <div tw="flex flex-col">
               <div tw="flex">
                 <div
-                  tw="flex items-center justify-end w-[60] h-[25] bg-black bg-opacity-50 rounded-lg"
+                  tw="flex items-center justify-end w-[400px] h-[150px] bg-black bg-opacity-50 rounded-lg"
                   style={{
                     backgroundImage: `url(${process.env.APP_URL}/artifacts/icons-play/DEGEN_button.svg)`,
-                    backgroundsize: "100 200",
+                    backgroundSize: "100% 100%",
+                    backgroundRepeat: "no-repeat",
                   }}
                 >
                   <div tw="flex mr-8">
@@ -71,10 +73,11 @@ const handleRequest = async (req) => {
               </div>
               <div tw="flex">
                 <div
-                  tw="flex items-center justify-end w-[60] h-[25] bg-black bg-opacity-50 rounded-lg"
+                  tw="flex items-center justify-end w-[400px] h-[150px] bg-black bg-opacity-50 rounded-lg"
                   style={{
                     backgroundImage: `url(${process.env.APP_URL}/artifacts/icons-play/HIGHER_button.svg)`,
-                    backgroundsize: "100 200",
+                    backgroundSize: "100% 100%",
+                    backgroundRepeat: "no-repeat",
                   }}
                 >
                   <div tw="flex mr-8">
@@ -89,10 +92,11 @@ const handleRequest = async (req) => {
             <div tw="flex flex-col">
               <div tw="flex">
                 <div
-                  tw="flex items-center justify-end w-[60] h-[25] bg-black bg-opacity-50 rounded-lg"
+                  tw="flex items-center justify-end w-[400px] h-[150px] bg-black bg-opacity-50 rounded-lg"
                   style={{
                     backgroundImage: `url(${process.env.APP_URL}/artifacts/icons-play/TYBG_button.svg)`,
-                    backgroundsize: "100 200",
+                    backgroundSize: "100% 100%",
+                    backgroundRepeat: "no-repeat",
                   }}
                 >
                   <div tw="flex mr-8">
@@ -105,10 +109,11 @@ const handleRequest = async (req) => {
               </div>
               <div tw="flex">
                 <div
-                  tw="flex items-center justify-end w-[60] h-[25] bg-black bg-opacity-50 rounded-lg"
+                  tw="flex items-center justify-end w-[400px] h-[150px] bg-black bg-opacity-50 rounded-lg"
                   style={{
                     backgroundImage: `url(${process.env.APP_URL}/artifacts/icons-play/CH13_button.svg)`,
-                    backgroundsize: "100 200",
+                    backgroundSize: "100% 100%",
+                    backgroundRepeat: "no-repeat",
                   }}
                 >
                   <div tw="flex mr-8">
