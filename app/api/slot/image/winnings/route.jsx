@@ -6,7 +6,6 @@ const handleRequest = async (req) => {
   const urlParams = new URLSearchParams(req.url);
   const playId = urlParams.get("playId");
   const play = await getPlayWithId(playId);
-  console.log(play);
   const award_token = String(
     Object.keys(play.award_token_balance)[0]
   ).toLowerCase();

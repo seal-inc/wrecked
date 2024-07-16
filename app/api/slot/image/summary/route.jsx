@@ -9,7 +9,7 @@ const handleRequest = async (req) => {
   const urlParams = new URLSearchParams(req.url);
   const playerId = urlParams.get("playerId");
   const player = await getOrCreateUserWithId(playerId);
-  const updatedPlayTokenBalances = {};
+  const updatedPlayTokenBalances = { ...player.play_token_balances };
   const updatedAwardTokenBalances = {};
 
   // Update play_token_balances
