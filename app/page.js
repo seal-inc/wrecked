@@ -3,8 +3,8 @@
 export default function Page() {
   const url =
     "https://warpcast.com/~/developers/frames?url=" +
-    (process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
+    (process.env.APP_URL
+      ? `https://${process.env.APP_URL}`
       : "http://localhost:3000") +
     "/api/slot";
 
