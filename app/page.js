@@ -4,7 +4,7 @@ export default function Page() {
   const url =
     "https://warpcast.com/~/developers/frames?url=" +
     (process.env.APP_URL ? `${process.env.APP_URL}` : "http://localhost:3000") +
-    "/api/slot";
+    "/mememania";
 
   console.log(url);
   return (
