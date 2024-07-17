@@ -21,10 +21,7 @@ export default function Page() {
     >
       <div className="m-2">
         <Image
-          src={
-            process.env.APP_URL ||
-            "http://localhost:3000" + "/artifacts/assets/log.png"
-          }
+          src="/artifacts/assets/log.png"
           width={700}
           height={700}
           className="object-scale-down"
