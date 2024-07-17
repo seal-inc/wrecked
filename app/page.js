@@ -25,8 +25,8 @@ export default function Page() {
             process.env.APP_URL ||
             "http://localhost:3000" + "/artifacts/assets/log.png"
           }
-          width={800}
-          height={800}
+          width={700}
+          height={700}
           className="object-scale-down"
         ></Image>
       </div>

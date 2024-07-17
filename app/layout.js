@@ -2,7 +2,7 @@ import "./globals.css";
 import { pixeled } from "./styles/fonts";
 
 export const metadata = {
-  title: "Mememania",
+  title: "Meme Mania",
   description: "The fastest way to the moon",
 };
 
