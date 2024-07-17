@@ -8,10 +8,9 @@ export default function Page() {
     (process.env.APP_URL ? `${process.env.APP_URL}` : "http://localhost:3000") +
     "/mememania";
 
-  console.log(url);
   return (
     <div
-      className="flex flex-col w-full h-screen items-center justify-center"
+      className="flex flex-col w-full h-screen items-center justify-center space-y-36"
       style={{
         backgroundImage: `url(${
           process.env.APP_URL || "http://localhost:3000"
@@ -20,20 +19,31 @@ export default function Page() {
         backgroundBlendMode: "lighten",
       }}
     >
-      <div className="overflow-hidden h-[650px] object-cover">
+      <div className="m-2">
         <Image
           src={
             process.env.APP_URL ||
-            "http://localhost:3000" + "/artifacts/assets/animation.gif"
+            "http://localhost:3000" + "/artifacts/assets/log.png"
           }
           width={800}
           height={800}
           className="object-scale-down"
         ></Image>
       </div>
-      <a href={url} target="_blank">
-        <button>Open mememania</button>
-      </a>
+
+      <div className="flex flex-col space-y-8 items-center">
+        <div className="text-3xl font-bold text-[#161718]">
+          {" "}
+          THE FASTEST WAY TO THE MOON
+        </div>
+        <a
+          href={url}
+          target="_blank"
+          className="px-8 py-4 bg-sky-200 shadow border-2 border-black justify-center items-center gap-2"
+        >
+          <button>OPEN FRAME</button>
+        </a>
+      </div>
     </div>
   );
 }

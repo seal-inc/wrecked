@@ -1,10 +1,5 @@
 import "./globals.css";
-import { Audiowide } from "next/font/google";
-
-const audiowide = Audiowide({
-  subsets: ["latin"],
-  weight: "400",
-});
+import { pixeled } from "./styles/fonts";
 
 export const metadata = {
   title: "Mememania",
@@ -14,7 +9,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={audiowide.className}>{children}</body>
+      <body className={pixeled.className}>{children}</body>
     </html>
   );
 }
