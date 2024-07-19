@@ -117,10 +117,7 @@ const handleRequest = async (req) => {
                   }}
                 >
                   <div tw="flex mr-8">
-                    <TokenBalance
-                      token={player?.award_token_balances?.ch13}
-                      currency={" "}
-                    />
+                    <TokenBalance token={player?.ch13_points} currency={" "} />
                   </div>
                 </div>
               </div>
