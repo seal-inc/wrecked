@@ -6,12 +6,6 @@ const handleRequest = async (req) => {
   const urlParams = new URLSearchParams(req.url);
   const playId = urlParams.get("playId");
   const play = await getPlayWithId(playId);
-  console.log({ play });
-  const outcome = {
-    reel1: play.combination["Reel 1"],
-    reel2: play.combination["Reel 2"],
-    reel3: play.combination["Reel 3"],
-  };
 
   return new ImageResponse(
     (

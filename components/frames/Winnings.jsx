@@ -11,13 +11,14 @@ export const Winnings = async ({ ctx }) => {
   }/api/slot/image/winnings?id=${Date.now()}&playId=${playId}`;
 
   const play = await getPlayWithId(playId);
+  const payoutMultiple =
+    Number(play.won_amount_usdc) / Number(play.play_amount);
 
   return {
     image: imageUrl,
-    textInput: `which one? ${
-      Object.keys(play.award_token_balance)[0]
-    } 🐋 or USDC 🐟
-    }?`,
+    textInput: `${Object.keys(
+      play.award_token_balance
+    )[0].toUpperCase()} 🐋 or USDC ${payoutMultiple > 0.1 ? "🐋" : "🐟"} ?`,
     buttons: [
       <Button
         action="post"
