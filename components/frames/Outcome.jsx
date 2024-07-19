@@ -46,8 +46,11 @@ export const Outcome = async ({ ctx, sessionId }) => {
     process.env.APP_URL
   }/api/slot/image/outcome?id=${Date.now()}&&playId=${play.id}`;
 
-  await fetchWithTimeout([imageUrl]);
-
+  try {
+    await fetchWithTimeout([imageUrl]);
+  } catch (e) {
+    console.error(e);
+  }
   return {
     image: imageUrl,
     textInput:
