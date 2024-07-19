@@ -1,7 +1,6 @@
 "use client";
 
 import { Player } from "@lottiefiles/react-lottie-player";
-import Image from "next/image";
 
 export default function Page() {
   const url =

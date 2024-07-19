@@ -40,6 +40,7 @@ export const Outcome = async ({ ctx, sessionId }) => {
     play_token_balances: {
       ["usdc"]: player.play_token_balances["usdc"] - playAmount,
     },
+    ch13_points: player.ch13_points + playAmount * 10,
   });
 
   const imageUrl = `${
@@ -59,9 +60,9 @@ export const Outcome = async ({ ctx, sessionId }) => {
         : payoutMultiple === 2
         ? "You did good 🎉🎉🎉"
         : payoutMultiple === 5
-        ? "This is rare! Smells like a whale 🐋"
+        ? "Smells like a whale 🐋"
         : payoutMultiple === 10
-        ? "WoW! A fortune! 💰💰💰"
+        ? "WoW! fortune! 💰💰💰"
         : "You are a legend!",
     buttons: [
       <Button
