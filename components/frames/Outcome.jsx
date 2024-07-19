@@ -15,8 +15,13 @@ export const Outcome = async ({ ctx, sessionId }) => {
   // TODO: Check if someone has the amount to play
   const player = await getOrCreateUserWithId(playerId);
   // Get the outcome of the play
-  const { combination, totalWinnings, payoutToken, payoutTokenAmount } =
-    await executePlay(playAmount);
+  const {
+    combination,
+    totalWinnings,
+    payoutToken,
+    payoutTokenAmount,
+    payoutMultiple,
+  } = await executePlay(playAmount);
 
   // Register the play
   const play = await registerPlay(
@@ -45,6 +50,16 @@ export const Outcome = async ({ ctx, sessionId }) => {
 
   return {
     image: imageUrl,
+    textInput:
+      payoutMultiple === 0.1
+        ? "Could have gone better! 🥺"
+        : payoutMultiple === 2
+        ? "You did good"
+        : payoutMultiple === 5
+        ? "This is rare"
+        : payoutMultiple === "10"
+        ? "WoW! You just made a fortune!"
+        : "You are a legend !",
     buttons: [
       <Button
         action="post"
@@ -52,7 +67,7 @@ export const Outcome = async ({ ctx, sessionId }) => {
           query: { value: "Winnings", playId: play.id, sessionId },
         }}
       >
-        👀 the prize! 🤑🤑🤑
+        👀 your payout!
       </Button>,
     ],
     imageOptions: {

@@ -78,6 +78,7 @@ export async function executePlay(playAmount) {
     combination,
     totalWinnings,
     payoutToken,
+    payoutMultiple,
     payoutTokenAmount: Math.floor(totalWinnings / tokenPrice),
   };
 }
