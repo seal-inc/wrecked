@@ -55,7 +55,7 @@ const handleRequest = async (req) => {
           </span>
           <span tw="text-5xl text-[#045BB0]  mt-[45px]">
             {player.award_token_balances
-              ? player.award_token_balances["chapter13"] || 0
+              ? player.award_token_balances["ch13"] || 0
               : 0}
           </span>
         </div>
