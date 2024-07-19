@@ -82,7 +82,7 @@ const generateClaimRewards = async (player) => {
   const tokenBalances = { ...awardTokenBalances, ...playTokenBalances };
 
   const tokens = Object.keys(tokenBalances);
-  console.log({ tokens });
+  delete tokens["ch13"]; // Remove ch13 token from claim rewards
   const claimRewards = [];
 
   const provider = new ethers.AlchemyProvider(
