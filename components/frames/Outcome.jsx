@@ -41,17 +41,16 @@ export const Outcome = async ({ ctx, sessionId }) => {
       ["usdc"]: player.play_token_balances["usdc"] - playAmount,
     },
     ch13_points: player.ch13_points + playAmount * 10,
+    award_token_balances: {
+      ["ch13"]: (player.award_token_balances["ch13"] || 0) + playAmount * 10,
+    },
   });
 
   const imageUrl = `${
     process.env.APP_URL
   }/api/slot/image/outcome?id=${Date.now()}&&playId=${play.id}`;
 
-  try {
-    await fetchWithTimeout([imageUrl]);
-  } catch (e) {
-    console.error(e);
-  }
+  await fetchWithTimeout([imageUrl]);
   return {
     image: imageUrl,
     textInput:

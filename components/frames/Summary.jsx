@@ -13,8 +13,6 @@ export const Summary = async ({ ctx, sessionId, transactionHash }) => {
     process.env.APP_URL
   }/api/slot/image/summary?id=${Date.now()}&playerId=${playerId}`;
 
-  const player = await getOrCreateUserWithId(ctx.message?.requesterFid);
-
   return {
     image: imageUrl,
     buttons: [
