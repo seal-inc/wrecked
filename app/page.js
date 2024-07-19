@@ -1,5 +1,6 @@
 "use client";
 
+import { Player } from "@lottiefiles/react-lottie-player";
 import Image from "next/image";
 
 export default function Page() {
@@ -10,7 +11,7 @@ export default function Page() {
 
   return (
     <div
-      className="flex flex-col w-full h-screen items-center justify-center space-y-36"
+      className="flex flex-col w-full h-full min-h-screen items-center justify-center space-y-2"
       style={{
         backgroundImage: `url(${
           process.env.APP_URL || "http://localhost:3000"
@@ -28,13 +29,21 @@ export default function Page() {
           <button>DOCS</button>
         </a>
       </div>
-      <div className="m-2">
-        <Image
-          src="/artifacts/assets/log.png"
-          width={700}
-          height={700}
-          className="object-scale-down"
-        ></Image>
+      <div
+      // className="h-[600px]"
+      // style={{
+      //   clipPath: "inset(25% 0% 25% 0%)",
+      // }}
+      >
+        <Player
+          src="/artifacts/assets/animation.json"
+          loop
+          autoplay
+          className="h-[500px]"
+          style={{
+            clipPath: "inset(20% 0% 20% 0%)",
+          }}
+        />
       </div>
 
       <div className="flex flex-col space-y-8 items-center">
