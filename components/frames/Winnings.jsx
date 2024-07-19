@@ -14,6 +14,8 @@ export const Winnings = async ({ ctx }) => {
 
   return {
     image: imageUrl,
+    textInput: `which one? ${play.award_token_balance.keys()[0]} 🐋 or USDC 🐟
+    }?`,
     buttons: [
       <Button
         action="post"
