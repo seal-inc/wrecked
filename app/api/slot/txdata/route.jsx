@@ -11,10 +11,15 @@ const handleRequest = frames(async (ctx) => {
   if (pressedButton.index === 1) {
     amount = 10;
   } else if (pressedButton.index === 2) {
-    if (typeof inputText === "string" && !isNaN(inputText)) {
+    if (
+      typeof inputText === "string" &&
+      !isNaN(inputText) &&
+      inputText.length > 0
+    ) {
+      console.log({ inputText });
       amount = Number(inputText);
     } else {
-      return error("Invalid input. Amount must be a number.", 400);
+      return error("Please enter a valid amount (>0) below.", 400);
     }
   }
   const txdata = getDepositTxData(amount);
