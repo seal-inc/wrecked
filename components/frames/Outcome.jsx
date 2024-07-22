@@ -42,7 +42,11 @@ export const Outcome = async ({ ctx, sessionId }) => {
     },
     ch13_points: player.ch13_points + playAmount * 10,
     award_token_balances: {
-      ["ch13"]: (player.award_token_balances["ch13"] || 0) + playAmount * 10,
+      ["ch13"]:
+        (player.award_token_balances
+          ? player.award_token_balances["ch13"] || 0
+          : 0) +
+        playAmount * 10,
     },
   });
 

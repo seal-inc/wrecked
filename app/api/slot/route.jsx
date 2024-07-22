@@ -28,13 +28,13 @@ const handleRequest = frames(async (ctx) => {
     const playerId = ctx.message?.requesterFid;
     const playId = ctx.searchParams.playId;
 
+    if (playerId) player = await getOrCreateUserWithId(playerId);
     if (sessionId) {
       session = await getSessionWithId(sessionId);
     } else if (!sessionId && playerId) {
       session = await createSession(playerId);
       sessionId = session.id;
     }
-    if (playerId) player = await getOrCreateUserWithId(playerId);
 
     if (playId && previousAction) {
       const play = await getPlayWithId(playId);
@@ -88,6 +88,7 @@ const handleRequest = frames(async (ctx) => {
             player?.play_token_balances ? player.play_token_balances["usdc"] : 0
           ) * 100
         ) / 100;
+      console.log({ playAmountBalance });
       return Deposit({
         ctx,
         sessionId,
@@ -122,6 +123,7 @@ const handleRequest = frames(async (ctx) => {
       return Intro({});
     }
   } catch (error) {
+    console.error({ error });
     return Intro({});
   }
 });
