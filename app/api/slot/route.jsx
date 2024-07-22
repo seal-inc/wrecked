@@ -67,7 +67,6 @@ const handleRequest = frames(async (ctx) => {
       const { from, to, nominalValueInUSDC } =
         await parseDepositTransactionData(transactionHash);
 
-      console.log({ nominalValueInUSDC });
       await updateSession(sessionId, {
         deposit_usdc: nominalValueInUSDC + (session?.deposit_usdc || 0),
         connected_wallet: from,
@@ -90,7 +89,6 @@ const handleRequest = frames(async (ctx) => {
             player?.play_token_balances ? player.play_token_balances["usdc"] : 0
           ) * 100
         ) / 100;
-      console.log({ playAmountBalance });
       return Deposit({
         ctx,
         sessionId,
