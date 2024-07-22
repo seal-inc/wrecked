@@ -46,9 +46,9 @@ const handleRequest = frames(async (ctx) => {
         });
         await updatePlayWithId(playId, { hodl: false });
       } else if (previousAction === "hodl") {
-        if (play.award_token_balance) {
-          const awardToken = Object.keys(play.award_token_balance)[0];
-          const payoutTokenAmount = play.award_token_balance[awardToken];
+        if (play.award_token_balances) {
+          const awardToken = Object.keys(play.award_token_balances)[0];
+          const payoutTokenAmount = play.award_token_balances[awardToken];
           await updatePlayerAccount(playerId, {
             award_token_balances: {
               ...(player.award_token_balances || {}),
@@ -123,8 +123,8 @@ const handleRequest = frames(async (ctx) => {
       return Intro({});
     }
   } catch (error) {
-    console.error({ error });
-    return Intro({});
+    console.error({ error, ctx });
+    return error("Ooops! We shit the bed. DM @mememania for help", 500);
   }
 });
 
