@@ -164,9 +164,8 @@ export const parseDepositTransactionData = async (transactionHash) => {
   });
 
   const { from, to, value } = logs[0].args;
-  const nominalValueInUSDC = Number(
-    BigInt(value) / BigInt(10 ** usdcMetadata.decimals)
-  );
+  const nominalValueInUSDC =
+    Number(value) / Number(10 ** usdcMetadata.decimals);
   assert(to === process.env.SLOT_HOT_ADDRESS);
   // TODO: Make sure this transaction is not redundant
   return {

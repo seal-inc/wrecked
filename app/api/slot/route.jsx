@@ -66,6 +66,8 @@ const handleRequest = frames(async (ctx) => {
     if (transactionHash && action === "Deposit") {
       const { from, to, nominalValueInUSDC } =
         await parseDepositTransactionData(transactionHash);
+
+      console.log({ nominalValueInUSDC });
       await updateSession(sessionId, {
         deposit_usdc: nominalValueInUSDC + (session?.deposit_usdc || 0),
         connected_wallet: from,
@@ -92,7 +94,7 @@ const handleRequest = frames(async (ctx) => {
       return Deposit({
         ctx,
         sessionId,
-        message: `Balance ${playAmountBalance || 0} USDC.`,
+        message: `Add more USDC`,
       });
     } else if (action === "Play") {
       return Play({ ctx, sessionId });
@@ -103,13 +105,14 @@ const handleRequest = frames(async (ctx) => {
             player?.play_token_balances ? player.play_token_balances["usdc"] : 0
           ) * 100
         ) / 100;
+      console.log({ playAmountBalance });
       if (
         playAmountBalance <= 0 ||
         playAmountBalance < Number(ctx.searchParams.amount)
       ) {
         return Deposit({
           ctx,
-          message: `Balance: ${playAmountBalance} USDC (deposit more)`,
+          message: `Balance: ${playAmountBalance} USDC`,
         });
       }
       return Outcome({ ctx, sessionId });

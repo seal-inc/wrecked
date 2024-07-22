@@ -16,7 +16,6 @@ const handleRequest = frames(async (ctx) => {
       !isNaN(inputText) &&
       inputText.length > 0
     ) {
-      console.log({ inputText });
       amount = Number(inputText);
     } else {
       return error("Please enter a valid amount (>0) below.", 400);
