@@ -94,7 +94,7 @@ const handleRequest = frames(async (ctx) => {
       return Deposit({
         ctx,
         sessionId,
-        message: `Add more USDC`,
+        message: `Balance: ${playAmountBalance} USDC`,
       });
     } else if (action === "Play") {
       return Play({ ctx, sessionId });
