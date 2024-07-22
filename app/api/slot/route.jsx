@@ -46,9 +46,9 @@ const handleRequest = frames(async (ctx) => {
         });
         await updatePlayWithId(playId, { hodl: false });
       } else if (previousAction === "hodl") {
-        if (play.award_token_balances) {
-          const awardToken = Object.keys(play.award_token_balances)[0];
-          const payoutTokenAmount = play.award_token_balances[awardToken];
+        if (play.award_token_balance) {
+          const awardToken = Object.keys(play.award_token_balance)[0];
+          const payoutTokenAmount = play.award_token_balance[awardToken];
           await updatePlayerAccount(playerId, {
             award_token_balances: {
               ...(player.award_token_balances || {}),
