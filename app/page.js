@@ -10,7 +10,7 @@ export default function Page() {
 
   return (
     <div
-      className="flex flex-col w-full h-full min-h-screen items-center justify-center space-y-2 p-2"
+      className="flex flex-col w-full h-full min-h-screen items-center space-y-2 p-2"
       style={{
         backgroundImage: `url(${
           process.env.APP_URL || "http://localhost:3000"
@@ -46,7 +46,7 @@ export default function Page() {
         />
       </div>
 
-      <div className="flex flex-col space-y-8 items-center relative top-[200px]">
+      <div className="flex flex-col space-y-8 items-center relative top-[600px]">
         <div className="text-3xl font-bold text-[#161718] text-center leading-normal">
           {" "}
           THE FASTEST WAY TO THE MOON
