@@ -60,14 +60,14 @@ export const Outcome = async ({ ctx, sessionId }) => {
     image: imageUrl,
     textInput:
       payoutMultiple === 0.1
-        ? "Could have gone better 🥺"
+        ? "Better luck next time 🥺"
         : payoutMultiple === 2
-        ? "You did good 🎉🎉🎉"
+        ? "WINNER! WINNER! 🎉🎉🎉"
         : payoutMultiple === 5
         ? "Smells like a whale 🐋"
         : payoutMultiple === 10
-        ? "WoW! fortune! 💰💰💰"
-        : "You are a legend!",
+        ? "🤑🤑🤑 WoW! Fortune! 💰💰💰"
+        : "To the Mooooon 🌕🌚🌝🌙",
     buttons: [
       <Button
         action="post"
