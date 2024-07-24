@@ -83,6 +83,12 @@ const handleRequest = frames(async (ctx) => {
       });
       return Play({ ctx, sessionId });
     } else if (action === "Deposit") {
+      if (!playerId in allowlist) {
+        return error(
+          "Oops! You are not the allowlist. Join the waitlist to play",
+          400
+        );
+      }
       const playAmountBalance =
         Math.round(
           Number(
