@@ -17,6 +17,8 @@ import {
   updateSession,
 } from "@/components/db/query";
 
+const allowlist = new Set([]);
+
 const handleRequest = frames(async (ctx) => {
   let player;
   let session;
@@ -83,7 +85,7 @@ const handleRequest = frames(async (ctx) => {
       });
       return Play({ ctx, sessionId });
     } else if (action === "Deposit") {
-      if (!playerId in allowlist) {
+      if (!allowlist.has(playerId)) {
         return error(
           "Oops! You are not the allowlist. Join the waitlist to play",
           400
