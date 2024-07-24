@@ -29,7 +29,7 @@ export default function Page() {
         </a>
       </div>
       <div
-        className="absolute top-0 flex justify-center items-center"
+        className="absolute top-0 m-auto flex justify-center items-center"
         // className="h-[600px]"
         // style={{
         //   clipPath: "inset(25% 0% 25% 0%)",
