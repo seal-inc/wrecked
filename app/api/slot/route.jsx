@@ -132,7 +132,7 @@ const handleRequest = frames(async (ctx) => {
   } catch (err) {
     if (err.message === "NOT ALLOWED") {
       return error(
-        "Oops! You are not the allowlist. Join the waitlist to play.",
+        "Oops! You are not on the allowlist. Join the waitlist to play.",
         400
       );
     }
