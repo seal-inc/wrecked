@@ -27,9 +27,6 @@ const allowlist = new Set([
 const handleRequest = frames(async (ctx) => {
   let player;
   let session;
-  if (!ctx.message.isValid) {
-    return error("Invalid signature", 400);
-  }
   try {
     const action = ctx.searchParams.value;
     const previousAction = ctx.searchParams.previousAction;
@@ -37,6 +34,9 @@ const handleRequest = frames(async (ctx) => {
     let sessionId = ctx.searchParams.sessionId;
     const playerId = ctx.message?.requesterFid;
     const playId = ctx.searchParams.playId;
+    if (ctx.message ? !ctx.message?.isValid : false) {
+      return error("Invalid signature", 400);
+    }
 
     if (playerId) player = await getOrCreateUserWithId(playerId);
     if (sessionId) {
@@ -144,7 +144,7 @@ const handleRequest = frames(async (ctx) => {
       );
     }
     console.error({ err, ctx });
-    return error("Ooops! We shit the bed. DM @mememania for help", 400);
+    return error("Ooops! DM @mememania for help", 400);
   }
 });
 
