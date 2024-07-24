@@ -18,7 +18,11 @@ import {
 } from "@/components/db/query";
 import { error } from "frames.js/core";
 
-const allowlist = new Set([]);
+const allowlist = new Set([
+  21224, 886, 13648, 315, 13180, 4923, 338915, 2210, 119, 2904, 258796, 296520,
+  355543, 297636, 291673, 339558, 238132, 358, 254210, 241532, 346075, 301772,
+  1214, 325, 265885, 16857, 333079, 302846, 8004, 2417, 4461, 771, 59, 3391,
+]);
 
 const handleRequest = frames(async (ctx) => {
   let player;
