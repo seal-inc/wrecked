@@ -27,6 +27,9 @@ const allowlist = new Set([
 const handleRequest = frames(async (ctx) => {
   let player;
   let session;
+  if (!ctx.message.isValid) {
+    return error("Invalid signature", 400);
+  }
   try {
     const action = ctx.searchParams.value;
     const previousAction = ctx.searchParams.previousAction;
