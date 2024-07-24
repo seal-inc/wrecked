@@ -18,7 +18,7 @@ import {
 } from "@/components/db/query";
 import { error } from "frames.js/core";
 
-const allowlist = new Set([21224]);
+const allowlist = new Set([]);
 
 const handleRequest = frames(async (ctx) => {
   let player;
