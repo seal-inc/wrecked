@@ -18,7 +18,7 @@ import {
 } from "@/components/db/query";
 import { error } from "frames.js/core";
 
-const allowlist = new Set([]);
+const allowlist = new Set([21224]);
 
 const handleRequest = frames(async (ctx) => {
   let player;
@@ -87,10 +87,7 @@ const handleRequest = frames(async (ctx) => {
       return Play({ ctx, sessionId });
     } else if (action === "Deposit") {
       if (!allowlist.has(playerId)) {
-        return error(
-          "Oops! You are not the allowlist. Join the waitlist to play",
-          400
-        );
+        throw new Error("NOT ALLOWED");
       }
       const playAmountBalance =
         Math.round(
@@ -132,9 +129,15 @@ const handleRequest = frames(async (ctx) => {
     } else {
       return Intro({});
     }
-  } catch (error) {
-    console.error({ error, ctx });
-    return error("Ooops! We shit the bed. DM @mememania for help", 500);
+  } catch (err) {
+    if (err.message === "NOT ALLOWED") {
+      return error(
+        "Oops! You are not the allowlist. Join the waitlist to play.",
+        400
+      );
+    }
+    console.error({ err, ctx });
+    return error("Ooops! We shit the bed. DM @mememania for help", 400);
   }
 });
 
