@@ -16,6 +16,7 @@ import {
   updatePlayerAccount,
   updateSession,
 } from "@/components/db/query";
+import { error } from "frames.js/core";
 
 const allowlist = new Set([]);
 
