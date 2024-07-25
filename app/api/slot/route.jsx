@@ -36,9 +36,9 @@ const handleRequest = frames(async (ctx) => {
     let sessionId = ctx.searchParams.sessionId;
     const playerId = ctx.message?.requesterFid;
     const playId = ctx.searchParams.playId;
-    // if (ctx.message ? !ctx.message?.isValid : false) {
-    //   return error("Invalid signature", 400);
-    // }
+    if (ctx.message ? !ctx.message?.isValid : false) {
+      return error("Invalid signature", 400);
+    }
 
     if (playerId) player = await getOrCreateUserWithId(playerId);
     if (sessionId) {
@@ -128,7 +128,7 @@ const handleRequest = frames(async (ctx) => {
           message: `Balance: ${playAmountBalance} USDC`,
         });
       }
-      return Outcome({ ctx, sessionId });
+      return Outcome({ ctx, sessionId, player });
     } else if (action === "End") {
       return End({ ctx, sessionId });
     } else if (action === "Winnings") {

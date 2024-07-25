@@ -8,12 +8,10 @@ import {
 } from "../db/query";
 import { fetchWithTimeout } from "../game/utils";
 
-export const Outcome = async ({ ctx, sessionId }) => {
+export const Outcome = async ({ ctx, sessionId, player }) => {
   const playAmount = ctx.searchParams.amount;
   const playerId = ctx.message?.requesterFid;
 
-  // TODO: Check if someone has the amount to play
-  const player = await getOrCreateUserWithId(playerId);
   // Get the outcome of the play
   const {
     combination,
@@ -52,7 +50,7 @@ export const Outcome = async ({ ctx, sessionId }) => {
 
   const imageUrl = `${
     process.env.APP_URL
-  }/api/slot/image/outcome?id=${Date.now()}&&playId=${play.id}`;
+  }/api/slot/image/outcome?id=${Date.now()}&&play=${JSON.stringify(play)}`;
 
   await fetchWithTimeout([imageUrl]);
   return {

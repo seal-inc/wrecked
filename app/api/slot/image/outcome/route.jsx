@@ -1,11 +1,9 @@
-import { getPlayWithId } from "@/components/db/query";
 import { fonts } from "@/components/game/fonts";
 import { ImageResponse } from "next/og";
 
 const handleRequest = async (req) => {
   const urlParams = new URLSearchParams(req.url);
-  const playId = urlParams.get("playId");
-  const play = await getPlayWithId(playId);
+  const play = JSON.parse(urlParams.get("play"));
 
   return new ImageResponse(
     (

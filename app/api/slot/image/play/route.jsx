@@ -21,10 +21,7 @@ const TokenBalance = ({ token, currency }) => {
 
 const handleRequest = async (req) => {
   const urlParams = new URLSearchParams(req.url);
-  const playerId = urlParams.get("playerId");
-
-  const player = await getOrCreateUserWithId(playerId);
-
+  const player = JSON.parse(urlParams.get("player"));
   return new ImageResponse(
     (
       <div
