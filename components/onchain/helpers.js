@@ -77,8 +77,7 @@ export const getDepositTxData = (amount) => {
 
 const generateClaimRewards = async (player) => {
   const awardTokenBalances = player?.award_token_balances;
-  // const playTokenBalances = player?.play_token_balances;
-  const playTokenBalances = {};
+  const playTokenBalances = player?.play_token_balances;
   const tokenBalances = { ...awardTokenBalances, ...playTokenBalances };
   delete tokenBalances["ch13"];
 

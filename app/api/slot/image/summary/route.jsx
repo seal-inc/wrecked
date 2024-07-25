@@ -13,9 +13,9 @@ const handleRequest = async (req) => {
   const updatedAwardTokenBalances = {};
 
   // Update play_token_balances
-  // for (const token in player.play_token_balances) {
-  //   updatedPlayTokenBalances[token] = 0;
-  // }
+  for (const token in player.play_token_balances) {
+    updatedPlayTokenBalances[token] = 0;
+  }
 
   // Update award_token_balances
   for (const token in player.award_token_balances) {
