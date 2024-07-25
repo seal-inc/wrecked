@@ -93,7 +93,7 @@ const handleRequest = frames(async (ctx) => {
         },
         wallet_address: from,
       });
-      return Play({ ctx, sessionId });
+      return Play({ ctx, sessionId, player });
     } else if (action === "Deposit") {
       if (!allowlist.has(playerId)) {
         throw new Error("NOT ALLOWED");
@@ -110,7 +110,7 @@ const handleRequest = frames(async (ctx) => {
         message: `Balance: ${playAmountBalance} USDC`,
       });
     } else if (action === "Play") {
-      return Play({ ctx, sessionId });
+      return Play({ ctx, sessionId, player });
     } else if (action === "Outcome") {
       const playAmountBalance =
         Math.round(
