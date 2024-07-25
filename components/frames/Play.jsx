@@ -9,8 +9,6 @@ export const Play = async ({ ctx, sessionId }) => {
     ctx.message?.requesterFid
   }`;
 
-  await fetchWithTimeout([imageUrl]);
-
   return {
     image: imageUrl,
     buttons: [
