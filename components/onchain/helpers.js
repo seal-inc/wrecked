@@ -101,11 +101,12 @@ const generateClaimRewards = async (player) => {
 
   for (const token of tokens) {
     const tokenMetadata = getTokenDetails(token);
+    console.log({ tokenMetadata });
     if (tokenBalances[token]) {
       const reward = {
         amount: ethers.parseUnits(
           String(tokenBalances[token]),
-          tokenMetadata.decimals
+          tokenMetadata.metadata.decimals
         ),
         tokenType: tokenMetadata.tokenType, // Assuming getTokenDetails provides tokenType
         nonce: ethers.hexlify(ethers.randomBytes(32)),
