@@ -101,7 +101,6 @@ const generateClaimRewards = async (player) => {
 
   for (const token of tokens) {
     const tokenMetadata = getTokenDetails(token);
-    console.log({ tokenMetadata });
     if (tokenBalances[token]) {
       const reward = {
         amount: ethers.parseUnits(

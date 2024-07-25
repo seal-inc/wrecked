@@ -35,7 +35,6 @@ export const Outcome = async ({ ctx, sessionId }) => {
   );
 
   // TODO: update the player's account
-
   await updatePlayerAccount(playerId, {
     play_token_balances: {
       ["usdc"]: player.play_token_balances["usdc"] - playAmount,
@@ -66,7 +65,7 @@ export const Outcome = async ({ ctx, sessionId }) => {
         : payoutMultiple === 5
         ? "Smells like a whale 🐋"
         : payoutMultiple === 10
-        ? "🤑🤑🤑 WoW! Fortune! 💰💰💰"
+        ? "🤑🤑 WoW! Fortune! 💰"
         : "To the Mooooon 🌕🌚🌝🌙",
     buttons: [
       <Button

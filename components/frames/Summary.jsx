@@ -1,10 +1,5 @@
 import { Button } from "frames.js/next";
 import { fonts } from "../game/fonts";
-import {
-  getOrCreateUserWithId,
-  getSessionWithId,
-  updatePlayerAccount,
-} from "../db/query";
 
 export const Summary = async ({ ctx, sessionId, transactionHash }) => {
   // Get the game with the specific id
