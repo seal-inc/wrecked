@@ -1,15 +1,11 @@
 import { Button } from "frames.js/next";
 import { fonts } from "../game/fonts";
 import { executePlay } from "../game/executePlay";
-import {
-  getOrCreateUserWithId,
-  registerPlay,
-  updatePlayerAccount,
-} from "../db/query";
+import { registerPlay, updatePlayerAccount } from "../db/query";
 import { fetchWithTimeout } from "../game/utils";
 
 export const Outcome = async ({ ctx, sessionId, player }) => {
-  const playAmount = ctx.searchParams.amount;
+  const playAmount = Number(ctx.searchParams.amount);
   const playerId = ctx.message?.requesterFid;
 
   // Get the outcome of the play
@@ -35,7 +31,7 @@ export const Outcome = async ({ ctx, sessionId, player }) => {
   // TODO: update the player's account
   await updatePlayerAccount(playerId, {
     play_token_balances: {
-      ["usdc"]: player.play_token_balances["usdc"] - playAmount,
+      ["usdc"]: Number(player.play_token_balances["usdc"]) - Number(playAmount),
     },
     ch13_points: player.ch13_points + playAmount * 10,
     award_token_balances: {

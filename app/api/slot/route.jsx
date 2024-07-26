@@ -12,7 +12,6 @@ import {
   getOrCreateUserWithId,
   getPlayWithId,
   getSessionWithId,
-  updatePlayWithId,
   updatePlayerAccount,
   updateSession,
 } from "@/components/db/query";
@@ -36,9 +35,9 @@ const handleRequest = frames(async (ctx) => {
     let sessionId = ctx.searchParams.sessionId;
     const playerId = ctx.message?.requesterFid;
     const playId = ctx.searchParams.playId;
-    // if (ctx.message ? !ctx.message?.isValid : false) {
-    //   return error("Invalid signature", 400);
-    // }
+    if (ctx.message ? !ctx.message?.isValid : false) {
+      return error("Invalid signature", 400);
+    }
 
     if (playerId) player = await getOrCreateUserWithId(playerId);
     if (sessionId) {
@@ -51,17 +50,19 @@ const handleRequest = frames(async (ctx) => {
     if (playId && previousAction) {
       const play = await getPlayWithId(playId);
       if (previousAction === "dump") {
-        await updatePlayerAccount(playerId, {
+        player = await updatePlayerAccount(playerId, {
           play_token_balances: {
-            ["usdc"]: player.play_token_balances["usdc"] + play.won_amount_usdc,
+            ["usdc"]:
+              Number(player.play_token_balances["usdc"]) +
+              Number(play.won_amount_usdc),
           },
         });
-        await updatePlayWithId(playId, { hodl: false });
+        // await updatePlayWithId(playId, { hodl: false });
       } else if (previousAction === "hodl") {
         if (play.award_token_balance) {
           const awardToken = Object.keys(play.award_token_balance)[0];
           const payoutTokenAmount = play.award_token_balance[awardToken];
-          await updatePlayerAccount(playerId, {
+          player = await updatePlayerAccount(playerId, {
             award_token_balances: {
               ...(player.award_token_balances || {}),
               [awardToken]:
@@ -71,7 +72,7 @@ const handleRequest = frames(async (ctx) => {
             },
           });
         }
-        await updatePlayWithId(playId, { hodl: true });
+        // await updatePlayWithId(playId, { hodl: true });
       }
     }
 
@@ -83,7 +84,7 @@ const handleRequest = frames(async (ctx) => {
         deposit_usdc: nominalValueInUSDC + (session?.deposit_usdc || 0),
         connected_wallet: from,
       });
-      await updatePlayerAccount(ctx.message.requesterFid, {
+      player = await updatePlayerAccount(ctx.message.requesterFid, {
         play_token_balances: {
           usdc:
             nominalValueInUSDC +
@@ -133,7 +134,7 @@ const handleRequest = frames(async (ctx) => {
     } else if (action === "Winnings") {
       return Winnings({ ctx, sessionId });
     } else if (action === "Summary") {
-      return Summary({ ctx, sessionId, transactionHash });
+      return Summary({ ctx, sessionId, transactionHash, player });
     } else {
       return Intro({});
     }

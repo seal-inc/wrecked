@@ -1,12 +1,12 @@
 import { Button } from "frames.js/next";
 import { fonts } from "../game/fonts";
 
-export const Summary = async ({ ctx, sessionId, transactionHash }) => {
+export const Summary = async ({ ctx, sessionId, transactionHash, player }) => {
   // Get the game with the specific id
   const playerId = ctx.message?.requesterFid;
   const imageUrl = `${
     process.env.APP_URL
-  }/api/slot/image/summary?id=${Date.now()}&playerId=${playerId}`;
+  }/api/slot/image/summary?id=${Date.now()}&player=${JSON.stringify(player)}`;
 
   return {
     image: imageUrl,

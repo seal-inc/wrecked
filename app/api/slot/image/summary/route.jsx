@@ -1,14 +1,10 @@
-import {
-  getOrCreateUserWithId,
-  updatePlayerAccount,
-} from "@/components/db/query";
+import { updatePlayerAccount } from "@/components/db/query";
 import { fonts } from "@/components/game/fonts";
 import { ImageResponse } from "next/og";
 
 const handleRequest = async (req) => {
   const urlParams = new URLSearchParams(req.url);
-  const playerId = urlParams.get("playerId");
-  const player = await getOrCreateUserWithId(playerId);
+  const player = JSON.parse(urlParams.get("player"));
   const updatedPlayTokenBalances = { ...player.play_token_balances };
   const updatedAwardTokenBalances = {};
 

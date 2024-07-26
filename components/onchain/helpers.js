@@ -104,7 +104,7 @@ const generateClaimRewards = async (player) => {
     if (tokenBalances[token]) {
       const reward = {
         amount: ethers.parseUnits(
-          String(tokenBalances[token]),
+          Number(tokenBalances[token]).toFixed(tokenMetadata.metadata.decimals),
           tokenMetadata.metadata.decimals
         ),
         tokenType: tokenMetadata.tokenType, // Assuming getTokenDetails provides tokenType
