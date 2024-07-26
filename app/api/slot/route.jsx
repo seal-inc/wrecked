@@ -36,9 +36,9 @@ const handleRequest = frames(async (ctx) => {
     let sessionId = ctx.searchParams.sessionId;
     const playerId = ctx.message?.requesterFid;
     const playId = ctx.searchParams.playId;
-    if (ctx.message ? !ctx.message?.isValid : false) {
-      return error("Invalid signature", 400);
-    }
+    // if (ctx.message ? !ctx.message?.isValid : false) {
+    //   return error("Invalid signature", 400);
+    // }
 
     if (playerId) player = await getOrCreateUserWithId(playerId);
     if (sessionId) {
@@ -118,7 +118,6 @@ const handleRequest = frames(async (ctx) => {
             player?.play_token_balances ? player.play_token_balances["usdc"] : 0
           ) * 100
         ) / 100;
-      console.log({ playAmountBalance });
       if (
         playAmountBalance <= 0 ||
         playAmountBalance < Number(ctx.searchParams.amount)
