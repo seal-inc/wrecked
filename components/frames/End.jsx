@@ -30,7 +30,7 @@ export const End = async ({ ctx, sessionId }) => {
           },
         }}
       >
-        No
+        No (Cash out)
       </Button>,
     ],
     imageOptions: {
