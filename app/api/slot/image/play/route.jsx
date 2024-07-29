@@ -22,6 +22,7 @@ const TokenBalance = ({ token, currency }) => {
 const handleRequest = async (req) => {
   const urlParams = new URLSearchParams(req.url);
   const player = JSON.parse(urlParams.get("player"));
+
   return new ImageResponse(
     (
       <div
@@ -44,7 +45,7 @@ const handleRequest = async (req) => {
           >
             <div tw="flex mr-8">
               <TokenBalance
-                token={player.play_token_balances["usdc"]}
+                token={player.play_token_balances?.usdc}
                 currency={"$"}
               />
             </div>
