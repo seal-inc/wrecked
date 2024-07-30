@@ -54,12 +54,12 @@ export const Outcome = async ({ ctx, sessionId, player }) => {
     textInput:
       payoutMultiple === 0.1
         ? "Better luck next time 🥺"
-        : payoutMultiple === 2
+        : payoutMultiple === 2 || payoutMultiple === 3
         ? "WINNER! WINNER! 🎉🎉🎉"
         : payoutMultiple === 5
         ? "Smells like a whale 🐋"
         : payoutMultiple === 10
-        ? "🤑🤑 WoW! Fortune! 💰"
+        ? "To the Moooon 🌕🌚🌙"
         : "To the Mooooon 🌕🌚🌝🌙",
     buttons: [
       <Button

@@ -53,7 +53,7 @@ const handleRequest = frames(async (ctx) => {
         player = await updatePlayerAccount(playerId, {
           play_token_balances: {
             ["usdc"]:
-              Number(player.play_token_balances["usdc"]) +
+              Number(player.play_token_balances?.usdc || 0) +
               Number(play.won_amount_usdc),
           },
         });
