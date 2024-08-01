@@ -29,6 +29,7 @@ const handleRequest = frames(async (ctx) => {
   let player;
   let session;
   try {
+    console.log("Response starts", Date.now());
     const action = ctx.searchParams.value;
     const previousAction = ctx.searchParams.previousAction;
     const transactionHash = ctx.message?.transactionId;
@@ -46,6 +47,8 @@ const handleRequest = frames(async (ctx) => {
       session = await createSession(playerId);
       sessionId = session.id;
     }
+
+    console.log("Response Continues:", Date.now());
 
     if (playId && previousAction) {
       const play = await getPlayWithId(playId);

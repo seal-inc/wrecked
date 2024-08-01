@@ -6,6 +6,8 @@ export const End = async ({ ctx, sessionId }) => {
   const playId = ctx.searchParams.playId;
   const imageUrl = `${process.env.APP_URL}/artifacts/end.gif`;
 
+  console.log("Response returns:", Date.now());
+
   return {
     image: imageUrl,
     buttons: [

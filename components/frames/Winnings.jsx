@@ -13,6 +13,8 @@ export const Winnings = async ({ ctx }) => {
   const payoutMultiple =
     Number(play.won_amount_usdc) / Number(play.play_amount);
 
+  console.log("Response returns:", Date.now());
+
   return {
     image: imageUrl,
     textInput: `${Object.keys(

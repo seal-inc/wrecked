@@ -8,6 +8,8 @@ export const Summary = async ({ ctx, sessionId, transactionHash, player }) => {
     process.env.APP_URL
   }/api/slot/image/summary?id=${Date.now()}&player=${JSON.stringify(player)}`;
 
+  console.log("Response returns:", Date.now());
+
   return {
     image: imageUrl,
     buttons: [

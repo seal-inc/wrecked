@@ -6,6 +6,7 @@ export const Play = async ({ ctx, sessionId, player }) => {
     process.env.APP_URL
   }/api/slot/image/play?id=${Date.now()}&&player=${JSON.stringify(player)}`;
 
+  console.log("Response returns:", Date.now());
   return {
     image: imageUrl,
     buttons: [

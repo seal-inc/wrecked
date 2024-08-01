@@ -4,6 +4,7 @@ import { fonts } from "../game/fonts";
 export const Deposit = async ({ ctx, message, sessionId }) => {
   const imageUrl = `${process.env.APP_URL}/artifacts/deposit.gif`;
 
+  console.log("Response returns", Date.now());
   return {
     image: imageUrl,
     buttons: [

@@ -47,8 +47,7 @@ export const Outcome = async ({ ctx, sessionId, player }) => {
   const imageUrl = `${
     process.env.APP_URL
   }/api/slot/image/outcome?id=${Date.now()}&&play=${JSON.stringify(play)}`;
-
-  await fetchWithTimeout([imageUrl]);
+  console.log("Response returns:", Date.now());
   return {
     image: imageUrl,
     textInput:
