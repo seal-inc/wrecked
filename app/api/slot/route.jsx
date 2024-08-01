@@ -16,6 +16,7 @@ import {
   updateSession,
 } from "@/components/db/query";
 import { error } from "frames.js/core";
+import { Info } from "@/components/frames/Info";
 
 const allowlist = new Set([
   21224, 886, 13648, 315, 13180, 4923, 338915, 2210, 119, 2904, 258796, 296520,
@@ -36,9 +37,9 @@ const handleRequest = frames(async (ctx) => {
     let sessionId = ctx.searchParams.sessionId;
     const playerId = ctx.message?.requesterFid;
     const playId = ctx.searchParams.playId;
-    if (ctx.message ? !ctx.message?.isValid : false) {
-      return error("Invalid signature", 400);
-    }
+    // if (ctx.message ? !ctx.message?.isValid : false) {
+    //   return error("Invalid signature", 400);
+    // }
 
     if (playerId) player = await getOrCreateUserWithId(playerId);
     if (sessionId) {
@@ -79,7 +80,9 @@ const handleRequest = frames(async (ctx) => {
       }
     }
 
-    if (transactionHash && action === "Deposit") {
+    if (action === "Info") {
+      return Info({});
+    } else if (transactionHash && action === "Deposit") {
       const { from, to, nominalValueInUSDC } =
         await parseDepositTransactionData(transactionHash);
 
