@@ -108,7 +108,7 @@ const handleRequest = frames(async (ctx) => {
       return Deposit({
         ctx,
         sessionId,
-        message: `Balance: ${playAmountBalance} USDC`,
+        message: `Your Balance: ${playAmountBalance} USDC`,
       });
     } else if (action === "Play") {
       return Play({ ctx, sessionId, player });
@@ -125,7 +125,7 @@ const handleRequest = frames(async (ctx) => {
       ) {
         return Deposit({
           ctx,
-          message: `Balance: ${playAmountBalance} USDC`,
+          message: `Your Balance: ${playAmountBalance} USDC`,
         });
       }
       return Outcome({ ctx, sessionId, player });
