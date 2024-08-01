@@ -18,7 +18,7 @@ const handleRequest = frames(async (ctx) => {
     ) {
       amount = Number(inputText);
     } else {
-      return error("Please enter a valid amount (>0) below.", 400);
+      return error("Oops! How much USDC (>0) are you depositing?", 400);
     }
   }
   const txdata = getDepositTxData(amount);
