@@ -8,6 +8,7 @@ import { Winnings } from "@/components/frames/Winnings";
 import { Summary } from "@/components/frames/Summary";
 import { parseDepositTransactionData } from "@/components/onchain/helpers";
 import {
+  createDeposit,
   createSession,
   getOrCreateUserWithId,
   getPlayWithId,
@@ -37,9 +38,9 @@ const handleRequest = frames(async (ctx) => {
     let sessionId = ctx.searchParams.sessionId;
     const playerId = ctx.message?.requesterFid;
     const playId = ctx.searchParams.playId;
-    // if (ctx.message ? !ctx.message?.isValid : false) {
-    //   return error("Invalid signature", 400);
-    // }
+    if (ctx.message ? !ctx.message?.isValid : false) {
+      return error("Invalid signature", 400);
+    }
 
     if (playerId) player = await getOrCreateUserWithId(playerId);
     if (sessionId) {
@@ -86,10 +87,13 @@ const handleRequest = frames(async (ctx) => {
       const { from, to, nominalValueInUSDC } =
         await parseDepositTransactionData(transactionHash);
 
-      await updateSession(sessionId, {
-        deposit_usdc: nominalValueInUSDC + (session?.deposit_usdc || 0),
-        connected_wallet: from,
-      });
+      await createDeposit(
+        playerId,
+        nominalValueInUSDC,
+        sessionId,
+        transactionHash
+      );
+
       player = await updatePlayerAccount(ctx.message.requesterFid, {
         play_token_balances: {
           usdc:

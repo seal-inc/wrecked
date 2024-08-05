@@ -28,8 +28,20 @@ export const Play = async ({ ctx, sessionId, player }) => {
       >
         10 USDC
       </Button>,
-      <Button action="post" target={{ query: { value: "End", sessionId } }}>
-        END
+      <Button
+        action="tx"
+        target={{
+          pathname: "/exit",
+        }}
+        post_url={{
+          pathname: "/",
+          query: {
+            value: "Summary",
+            sessionId,
+          },
+        }}
+      >
+        Cash out
       </Button>,
     ],
     imageOptions: {

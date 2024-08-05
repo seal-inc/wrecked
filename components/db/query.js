@@ -55,6 +55,30 @@ export const createSession = async (playerId) => {
   return data;
 };
 
+export const createDeposit = async (
+  playerId,
+  amount,
+  sessionId,
+  transactionHash
+) => {
+  const { data, error } = await supabase
+    .from("deposits")
+    .insert([
+      {
+        player: playerId,
+        amount,
+        session: sessionId,
+        transaction_hash: transactionHash,
+      },
+    ])
+    .select()
+    .single();
+  if (error) {
+    throw error;
+  }
+  return data;
+};
+
 export const updateSession = async (sessionId, newSessionInfo) => {
   const { data, error } = await supabase
     .from("sessions")
