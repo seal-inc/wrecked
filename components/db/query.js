@@ -145,7 +145,13 @@ export async function getOrCreateUserWithId(fid) {
     return retrievedData;
   }
   const userData = await getUserDataForFid({ fid });
-  const data = { id: fid, username: userData?.username };
+
+  // Everyone starts with 1 USDC
+  const data = {
+    id: fid,
+    username: userData?.username,
+    play_token_balances: { usdc: 1 },
+  };
 
   // Step 3: If the record does not exist, insert a new one
   if (retrieveError) {
