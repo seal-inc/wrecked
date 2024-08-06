@@ -18,7 +18,7 @@ import {
 } from "@/components/db/query";
 import { error } from "frames.js/core";
 import { Info } from "@/components/frames/Info";
-import { Ch13Details } from "@/components/frames/ch13Details";
+import { Ch13Details } from "@/components/frames/Ch13Details";
 
 const allowlist = new Set([
   21224, 886, 13648, 315, 13180, 4923, 338915, 2210, 119, 2904, 258796, 296520,
@@ -84,7 +84,7 @@ const handleRequest = frames(async (ctx) => {
 
     if (action === "Info") {
       return Info({});
-    } else if (action === "ch13Details") {
+    } else if (action === "Ch13Details") {
       return Ch13Details({});
     } else if (transactionHash && action === "Deposit") {
       const { from, to, nominalValueInUSDC } =

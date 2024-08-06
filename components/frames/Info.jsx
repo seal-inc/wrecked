@@ -7,7 +7,7 @@ export const Info = async ({}) => {
   return {
     image: imageUrl,
     buttons: [
-      <Button action="post" target={{ query: { value: "ch13Details" } }}>
+      <Button action="post" target={{ query: { value: "Ch13Details" } }}>
         Tell me about $CH13
       </Button>,
       <Button action="post" target={{ query: { value: "Play" } }}>
