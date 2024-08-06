@@ -5,22 +5,6 @@ import { ImageResponse } from "next/og";
 const handleRequest = async (req) => {
   const urlParams = new URLSearchParams(req.url);
   const player = JSON.parse(urlParams.get("player"));
-  const updatedPlayTokenBalances = { ...player.play_token_balances };
-  const updatedAwardTokenBalances = {};
-
-  // Update play_token_balances
-  for (const token in player.play_token_balances) {
-    updatedPlayTokenBalances[token] = 0;
-  }
-
-  // Update award_token_balances
-  for (const token in player.award_token_balances) {
-    updatedAwardTokenBalances[token] = 0;
-  }
-  await updatePlayerAccount(player.id, {
-    play_token_balances: updatedPlayTokenBalances,
-    award_token_balances: updatedAwardTokenBalances,
-  });
 
   return new ImageResponse(
     (

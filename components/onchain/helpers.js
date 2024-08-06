@@ -13,11 +13,7 @@ import { metadata as higherMetadata } from "./contracts/higher/metadata";
 import { metadata as tybgMetadata } from "./contracts/tybg/metadata";
 import { metadata as mememaniaMetadata } from "./contracts/mememania/metadata";
 import { publicClient } from "./clients/publicClient";
-import { client } from "./clients/slotHotWalletClient";
 import { ethers } from "ethers";
-import { ErrorDecoder } from "ethers-decode-error";
-
-const errorDecoder = ErrorDecoder.create([mememaniaABI]);
 
 export const getTokenDetails = (token) => {
   switch (token) {
@@ -89,14 +85,8 @@ const generateClaimRewards = async (player) => {
     process.env.ALCHEMY_API_KEY
   );
   const signer = new ethers.Wallet(
-    process.env.SLOT_HOT_ADDRESS_PRIVATE_KEY,
+    process.env.SLOT_SIGNER_ADDRESS_PRIVATE_KEY,
     provider
-  );
-
-  const contract = new ethers.Contract(
-    mememaniaMetadata.contractAddress,
-    mememaniaABI,
-    signer
   );
 
   for (const token of tokens) {
@@ -108,29 +98,35 @@ const generateClaimRewards = async (player) => {
           tokenMetadata.metadata.decimals
         ),
         tokenType: tokenMetadata.tokenType, // Assuming getTokenDetails provides tokenType
-        nonce: ethers.hexlify(ethers.randomBytes(32)),
+        userIdentifier: player.id,
       };
 
-      const messageHash = ethers.solidityPackedKeccak256(
-        ["address", "uint256", "uint8", "bytes32"],
-        [
-          player.wallet_address.toLowerCase(),
-          reward.amount,
-          reward.tokenType,
-          reward.nonce,
-        ]
-      );
-      const messageHashBytes = ethers.getBytes(messageHash);
-
-      const signature = await signer.signMessage(messageHashBytes);
-      claimRewards.push({
-        ...reward,
-        signature,
-      });
+      claimRewards.push(reward);
     }
   }
 
-  return claimRewards;
+  const nonce = player.nonce;
+
+  const rewardHashes = claimRewards.map((reward) =>
+    ethers.solidityPackedKeccak256(
+      ["uint256", "uint8", "uint256"],
+      [reward.amount, reward.tokenType, reward.userIdentifier]
+    )
+  );
+
+  const messageHash = ethers.solidityPackedKeccak256(
+    ["address", "uint256", "bytes32"],
+    [
+      player.wallet_address.toLowerCase(),
+      nonce,
+      ethers.solidityPackedKeccak256(["bytes32[]"], [rewardHashes]),
+    ]
+  );
+
+  const messageHashBytes = ethers.getBytes(messageHash);
+  const signature = await signer.signMessage(messageHashBytes);
+
+  return [nonce, claimRewards, signature];
 };
 
 export const getExitTxData = async (player) => {
@@ -144,7 +140,7 @@ export const getExitTxData = async (player) => {
       data: encodeFunctionData({
         abi: mememaniaABI,
         functionName: "claimRewards",
-        args: [claimRewards],
+        args: claimRewards,
       }),
     },
   };
@@ -172,25 +168,4 @@ export const parseDepositTransactionData = async (transactionHash) => {
     to,
     nominalValueInUSDC,
   };
-};
-
-export const sendToken = async (token, amount, address) => {
-  const account = privateKeyToAccount(process.env.SLOT_HOT_ADDRESS_PRIVATE_KEY);
-  const tokenDetails = getTokenDetails(token);
-
-  const decimals = tokenDetails.metadata.decimals;
-  const amountToSendInDecimals = Math.floor(amount * 10 ** decimals);
-
-  const calldata = encodeFunctionData({
-    abi: tokenDetails.abi,
-    functionName: "transfer",
-    args: [address, amountToSendInDecimals],
-  });
-
-  const hash = await client.sendTransaction({
-    account,
-    to: tokenDetails.metadata.contractAddress,
-    data: calldata,
-  });
-  return hash;
 };

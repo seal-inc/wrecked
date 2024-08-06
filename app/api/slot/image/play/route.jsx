@@ -3,7 +3,9 @@ import { fonts } from "@/components/game/fonts";
 import { ImageResponse } from "next/og";
 
 const TokenBalance = ({ token, currency }) => {
-  const balance = (currency || "") + Number(token || 0).toLocaleString();
+  const balance =
+    (currency || "") +
+    Number(token ? (token > 0 ? token : 0) : 0).toLocaleString();
   return (
     <div
       tw={`flex text-[#045BB0] justify-center ${

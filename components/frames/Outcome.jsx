@@ -2,7 +2,6 @@ import { Button } from "frames.js/next";
 import { fonts } from "../game/fonts";
 import { executePlay } from "../game/executePlay";
 import { registerPlay, updatePlayerAccount } from "../db/query";
-import { fetchWithTimeout } from "../game/utils";
 
 export const Outcome = async ({ ctx, sessionId, player }) => {
   const playAmount = Number(ctx.searchParams.amount);
