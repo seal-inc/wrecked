@@ -5,7 +5,7 @@ import { getOrCreateUserWithId } from "@/components/db/query";
 
 const handleRequest = frames(async (ctx) => {
   console.log(ctx.message);
-  if (ctx.message?.isValid) {
+  if (!ctx.message?.isValid) {
     return error("Invalid signature", 400);
   }
   const player = await getOrCreateUserWithId(ctx.message?.requesterFid);
