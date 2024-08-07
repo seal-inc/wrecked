@@ -1,326 +1,333 @@
 [
   {
+    "type": "constructor",
+    "name": "",
     "inputs": [
       {
-        "internalType": "address",
+        "type": "address",
         "name": "_token1",
-        "type": "address"
+        "internalType": "address"
       },
       {
-        "internalType": "address",
+        "type": "address",
         "name": "_token2",
-        "type": "address"
+        "internalType": "address"
       },
       {
-        "internalType": "address",
+        "type": "address",
         "name": "_token3",
-        "type": "address"
+        "internalType": "address"
       },
       {
-        "internalType": "address",
+        "type": "address",
         "name": "_token4",
-        "type": "address"
+        "internalType": "address"
       },
       {
-        "internalType": "address",
+        "type": "address",
         "name": "_authorizedSigner",
-        "type": "address"
+        "internalType": "address"
       }
     ],
-    "stateMutability": "nonpayable",
-    "type": "constructor"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "target",
-        "type": "address"
-      }
-    ],
-    "name": "AddressEmptyCode",
-    "type": "error"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "account",
-        "type": "address"
-      }
-    ],
-    "name": "AddressInsufficientBalance",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "ECDSAInvalidSignature",
-    "type": "error"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "length",
-        "type": "uint256"
-      }
-    ],
-    "name": "ECDSAInvalidSignatureLength",
-    "type": "error"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "bytes32",
-        "name": "s",
-        "type": "bytes32"
-      }
-    ],
-    "name": "ECDSAInvalidSignatureS",
-    "type": "error"
-  },
-  {
-    "inputs": [],
-    "name": "FailedInnerCall",
-    "type": "error"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "expected",
-        "type": "address"
-      },
-      {
-        "internalType": "address",
-        "name": "passed",
-        "type": "address"
-      }
-    ],
-    "name": "InvalidSigner",
-    "type": "error"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "token",
-        "type": "address"
-      }
-    ],
-    "name": "SafeERC20FailedOperation",
-    "type": "error"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "claimant",
-        "type": "address"
-      },
-      {
-        "components": [
-          {
-            "internalType": "uint256",
-            "name": "amount",
-            "type": "uint256"
-          },
-          {
-            "internalType": "enum MemeMania.TokenType",
-            "name": "tokenType",
-            "type": "uint8"
-          },
-          {
-            "internalType": "uint256",
-            "name": "userIdentifier",
-            "type": "uint256"
-          }
-        ],
-        "indexed": false,
-        "internalType": "struct MemeMania.Reward[]",
-        "name": "rewards",
-        "type": "tuple[]"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "nonce",
-        "type": "uint256"
-      }
-    ],
-    "name": "RewardsClaimed",
-    "type": "event"
-  },
-  {
-    "inputs": [],
-    "name": "authorizedSigner",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "nonce",
-        "type": "uint256"
-      },
-      {
-        "components": [
-          {
-            "internalType": "uint256",
-            "name": "amount",
-            "type": "uint256"
-          },
-          {
-            "internalType": "enum MemeMania.TokenType",
-            "name": "tokenType",
-            "type": "uint8"
-          },
-          {
-            "internalType": "uint256",
-            "name": "userIdentifier",
-            "type": "uint256"
-          }
-        ],
-        "internalType": "struct MemeMania.Reward[]",
-        "name": "rewards",
-        "type": "tuple[]"
-      },
-      {
-        "internalType": "bytes",
-        "name": "signature",
-        "type": "bytes"
-      }
-    ],
-    "name": "claimRewards",
     "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
+    "stateMutability": "nonpayable"
   },
   {
+    "type": "error",
+    "name": "AddressEmptyCode",
     "inputs": [
       {
-        "internalType": "address",
-        "name": "recipient",
-        "type": "address"
+        "type": "address",
+        "name": "target",
+        "internalType": "address"
+      }
+    ],
+    "outputs": []
+  },
+  {
+    "type": "error",
+    "name": "AddressInsufficientBalance",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "account",
+        "internalType": "address"
+      }
+    ],
+    "outputs": []
+  },
+  {
+    "type": "error",
+    "name": "ECDSAInvalidSignature",
+    "inputs": [],
+    "outputs": []
+  },
+  {
+    "type": "error",
+    "name": "ECDSAInvalidSignatureLength",
+    "inputs": [
+      {
+        "type": "uint256",
+        "name": "length",
+        "internalType": "uint256"
+      }
+    ],
+    "outputs": []
+  },
+  {
+    "type": "error",
+    "name": "ECDSAInvalidSignatureS",
+    "inputs": [
+      {
+        "type": "bytes32",
+        "name": "s",
+        "internalType": "bytes32"
+      }
+    ],
+    "outputs": []
+  },
+  {
+    "type": "error",
+    "name": "FailedInnerCall",
+    "inputs": [],
+    "outputs": []
+  },
+  {
+    "type": "error",
+    "name": "InvalidSigner",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "expected",
+        "internalType": "address"
       },
       {
-        "internalType": "uint256",
-        "name": "nonce",
-        "type": "uint256"
+        "type": "address",
+        "name": "passed",
+        "internalType": "address"
+      }
+    ],
+    "outputs": []
+  },
+  {
+    "type": "error",
+    "name": "SafeERC20FailedOperation",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "token",
+        "internalType": "address"
+      }
+    ],
+    "outputs": []
+  },
+  {
+    "type": "event",
+    "name": "RewardsClaimed",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "claimant",
+        "indexed": true,
+        "internalType": "address"
       },
       {
+        "type": "tuple[]",
+        "name": "rewards",
         "components": [
           {
-            "internalType": "uint256",
+            "type": "uint256",
             "name": "amount",
-            "type": "uint256"
+            "internalType": "uint256"
           },
           {
-            "internalType": "enum MemeMania.TokenType",
+            "type": "uint8",
             "name": "tokenType",
-            "type": "uint8"
-          },
-          {
-            "internalType": "uint256",
-            "name": "userIdentifier",
-            "type": "uint256"
+            "internalType": "enum MemeMania.TokenType"
           }
         ],
-        "internalType": "struct MemeMania.Reward[]",
-        "name": "rewards",
-        "type": "tuple[]"
-      }
-    ],
-    "name": "getMessageHash",
-    "outputs": [
+        "indexed": false,
+        "internalType": "struct MemeMania.Reward[]"
+      },
       {
-        "internalType": "bytes32",
-        "name": "",
-        "type": "bytes32"
+        "type": "uint256",
+        "name": "nonce",
+        "indexed": false,
+        "internalType": "uint256"
+      },
+      {
+        "type": "uint256",
+        "name": "userIdentifier",
+        "indexed": true,
+        "internalType": "uint256"
       }
     ],
-    "stateMutability": "pure",
-    "type": "function"
+    "outputs": [],
+    "anonymous": false
   },
   {
+    "type": "function",
+    "name": "authorizedSigner",
+    "inputs": [],
+    "outputs": [
+      {
+        "type": "address",
+        "name": "",
+        "internalType": "address"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "function",
+    "name": "claimRewards",
     "inputs": [
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
+        "type": "uint256",
+        "name": "userIdentifier",
+        "internalType": "uint256"
+      },
+      {
+        "type": "uint256",
+        "name": "nonce",
+        "internalType": "uint256"
+      },
+      {
+        "type": "tuple[]",
+        "name": "rewards",
+        "components": [
+          {
+            "type": "uint256",
+            "name": "amount",
+            "internalType": "uint256"
+          },
+          {
+            "type": "uint8",
+            "name": "tokenType",
+            "internalType": "enum MemeMania.TokenType"
+          }
+        ],
+        "internalType": "struct MemeMania.Reward[]"
+      },
+      {
+        "type": "bytes",
+        "name": "signature",
+        "internalType": "bytes"
       }
     ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "getMessageHash",
+    "inputs": [
+      {
+        "type": "uint256",
+        "name": "userIdentifier",
+        "internalType": "uint256"
+      },
+      {
+        "type": "uint256",
+        "name": "nonce",
+        "internalType": "uint256"
+      },
+      {
+        "type": "tuple[]",
+        "name": "rewards",
+        "components": [
+          {
+            "type": "uint256",
+            "name": "amount",
+            "internalType": "uint256"
+          },
+          {
+            "type": "uint8",
+            "name": "tokenType",
+            "internalType": "enum MemeMania.TokenType"
+          }
+        ],
+        "internalType": "struct MemeMania.Reward[]"
+      }
+    ],
+    "outputs": [
+      {
+        "type": "bytes32",
+        "name": "",
+        "internalType": "bytes32"
+      }
+    ],
+    "stateMutability": "pure"
+  },
+  {
+    "type": "function",
     "name": "lastUsedNonces",
-    "outputs": [
+    "inputs": [
       {
-        "internalType": "uint256",
+        "type": "uint256",
         "name": "",
-        "type": "uint256"
+        "internalType": "uint256"
       }
     ],
-    "stateMutability": "view",
-    "type": "function"
+    "outputs": [
+      {
+        "type": "uint256",
+        "name": "",
+        "internalType": "uint256"
+      }
+    ],
+    "stateMutability": "view"
   },
   {
-    "inputs": [],
+    "type": "function",
     "name": "token1",
+    "inputs": [],
     "outputs": [
       {
-        "internalType": "contract IERC20",
+        "type": "address",
         "name": "",
-        "type": "address"
+        "internalType": "contract IERC20"
       }
     ],
-    "stateMutability": "view",
-    "type": "function"
+    "stateMutability": "view"
   },
   {
-    "inputs": [],
+    "type": "function",
     "name": "token2",
+    "inputs": [],
     "outputs": [
       {
-        "internalType": "contract IERC20",
+        "type": "address",
         "name": "",
-        "type": "address"
+        "internalType": "contract IERC20"
       }
     ],
-    "stateMutability": "view",
-    "type": "function"
+    "stateMutability": "view"
   },
   {
-    "inputs": [],
+    "type": "function",
     "name": "token3",
+    "inputs": [],
     "outputs": [
       {
-        "internalType": "contract IERC20",
+        "type": "address",
         "name": "",
-        "type": "address"
+        "internalType": "contract IERC20"
       }
     ],
-    "stateMutability": "view",
-    "type": "function"
+    "stateMutability": "view"
   },
   {
-    "inputs": [],
+    "type": "function",
     "name": "token4",
+    "inputs": [],
     "outputs": [
       {
-        "internalType": "contract IERC20",
+        "type": "address",
         "name": "",
-        "type": "address"
+        "internalType": "contract IERC20"
       }
     ],
-    "stateMutability": "view",
-    "type": "function"
+    "stateMutability": "view"
   }
 ]

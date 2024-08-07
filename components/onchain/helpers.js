@@ -1,5 +1,4 @@
 import { encodeFunctionData, parseEventLogs } from "viem";
-import { privateKeyToAccount } from "viem/accounts";
 import degenABI from "./contracts/degen/abi.json" assert { type: "json" };
 import higherABI from "./contracts/higher/abi.json" assert { type: "json" };
 import tybgABI from "./contracts/tybg/abi.json" assert { type: "json" };
@@ -98,7 +97,6 @@ const generateClaimRewards = async (player) => {
           tokenMetadata.metadata.decimals
         ),
         tokenType: tokenMetadata.tokenType, // Assuming getTokenDetails provides tokenType
-        userIdentifier: player.id,
       };
 
       claimRewards.push(reward);
@@ -106,18 +104,19 @@ const generateClaimRewards = async (player) => {
   }
 
   const nonce = player.nonce;
+  const userIdentifier = player.id;
 
   const rewardHashes = claimRewards.map((reward) =>
     ethers.solidityPackedKeccak256(
-      ["uint256", "uint8", "uint256"],
-      [reward.amount, reward.tokenType, reward.userIdentifier]
+      ["uint256", "uint8"],
+      [reward.amount, reward.tokenType]
     )
   );
 
   const messageHash = ethers.solidityPackedKeccak256(
-    ["address", "uint256", "bytes32"],
+    ["uint256", "uint256", "bytes32"],
     [
-      player.wallet_address.toLowerCase(),
+      userIdentifier,
       nonce,
       ethers.solidityPackedKeccak256(["bytes32[]"], [rewardHashes]),
     ]
@@ -126,7 +125,7 @@ const generateClaimRewards = async (player) => {
   const messageHashBytes = ethers.getBytes(messageHash);
   const signature = await signer.signMessage(messageHashBytes);
 
-  return [nonce, claimRewards, signature];
+  return [userIdentifier, nonce, claimRewards, signature];
 };
 
 export const getExitTxData = async (player) => {
