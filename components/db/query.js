@@ -43,6 +43,21 @@ export const getSessionWithId = async (id) => {
   return data;
 };
 
+export const getDepositsInSession = async (sessionId) => {
+  const { data, error } = await supabase
+    .from("deposits")
+    .select("*")
+    .eq("session", sessionId);
+
+  if (error) {
+    throw error;
+  }
+  // Add the rows of deposits and return the sum
+  return data.reduce((acc, deposit) => {
+    return acc + Number(deposit.amount);
+  }, 0);
+};
+
 export const createSession = async (playerId) => {
   const { data, error } = await supabase
     .from("sessions")

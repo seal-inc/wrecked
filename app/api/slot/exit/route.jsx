@@ -4,9 +4,9 @@ import { error, transaction } from "frames.js/core";
 import { getOrCreateUserWithId } from "@/components/db/query";
 
 const handleRequest = frames(async (ctx) => {
-  if (!ctx.message?.isValid) {
-    return error("Invalid signature", 400);
-  }
+  // if (!ctx.message?.isValid) {
+  //   return error("Invalid signature", 400);
+  // }
   const player = await getOrCreateUserWithId(ctx.message?.requesterFid);
 
   // Make the user sign if there is no connected wallet!

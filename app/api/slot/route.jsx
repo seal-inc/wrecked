@@ -39,9 +39,9 @@ const handleRequest = frames(async (ctx) => {
     let sessionId = ctx.searchParams.sessionId;
     const playerId = ctx.message?.requesterFid;
     const playId = ctx.searchParams.playId;
-    if (ctx.message ? !ctx.message?.isValid : false) {
-      return error("Invalid signature", 400);
-    }
+    // if (ctx.message ? !ctx.message?.isValid : false) {
+    //   return error("Invalid signature", 400);
+    // }
 
     if (playerId) player = await getOrCreateUserWithId(playerId);
     if (sessionId) {
@@ -76,6 +76,8 @@ const handleRequest = frames(async (ctx) => {
                   player.award_token_balances[awardToken]) ||
                   0) + payoutTokenAmount,
             },
+            award_tokens_usdc_value:
+              player.award_tokens_usdc_value + play.won_amount_usdc,
           });
         }
         // await updatePlayWithId(playId, { hodl: true });
