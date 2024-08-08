@@ -40,7 +40,10 @@ export const Summary = async ({ ctx, sessionId, transactionHash, player }) => {
       >
         👀 your earnings
       </Button>,
-      <Button action="link" target="">
+      <Button
+        action="link"
+        target={`https://warpcast.com/~/compose?text=${"LFG Meme Mania! I just played! You have to try this too!"}&embeds[]=${imageUrl}&embeds[]=${"https://launch.mememania.app/mememania"}}`}
+      >
         Share
       </Button>,
     ],
