@@ -36,7 +36,7 @@ export const Play = async ({ ctx, sessionId, player }) => {
               action="post"
               target={{ query: { value: "Deposit", sessionId } }}
             >
-              Deposit USDC (Base) to play
+              Deposit more USDC (Base) to play
             </Button>,
           ]),
       (player.play_token_balances["usdc"] ||
