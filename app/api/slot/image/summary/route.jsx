@@ -48,7 +48,7 @@ const handleRequest = async (req) => {
           </div>
           <div tw="flex w-1/2 justify-end">
             <span tw="flex text-[#045BB0] text-4xl pr-[120px]">
-              {player.play_token_balances["usdc"] || 0}
+              {Number(player.play_token_balances["usdc"] || 0).toFixed(1)}
             </span>
           </div>
         </div>
