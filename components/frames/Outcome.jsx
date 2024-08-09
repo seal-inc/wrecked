@@ -27,7 +27,6 @@ export const Outcome = async ({ ctx, sessionId, player }) => {
     payoutTokenAmount
   );
 
-  // TODO: update the player's account
   await updatePlayerAccount(playerId, {
     play_token_balances: {
       ["usdc"]: Number(player.play_token_balances["usdc"]) - Number(playAmount),
@@ -49,24 +48,32 @@ export const Outcome = async ({ ctx, sessionId, player }) => {
   console.log("Response returns:", Date.now());
   return {
     image: imageUrl,
-    textInput:
-      payoutMultiple === 0.1
-        ? "Better luck next time 🥺"
-        : payoutMultiple === 2 || payoutMultiple === 3
-        ? "WINNER! WINNER! 🎉🎉🎉"
-        : payoutMultiple === 5
-        ? "Smells like a whale 🐋"
-        : payoutMultiple === 10
-        ? "To the Moooon 🌕🌚🌙"
-        : "To the Mooooon 🌕🌚🌝🌙",
     buttons: [
       <Button
         action="post"
         target={{
-          query: { value: "Winnings", playId: play.id, sessionId },
+          query: {
+            value: "Play",
+            previousAction: "dump",
+            sessionId,
+            playId: play.id,
+          },
         }}
       >
-        👀 your payout!
+        {`Dump for ${play.won_amount_usdc} USDC`}
+      </Button>,
+      <Button
+        action="post"
+        target={{
+          query: {
+            value: "Play",
+            previousAction: "hodl",
+            sessionId,
+            playId: play.id,
+          },
+        }}
+      >
+        {`HODL ${payoutToken.toUpperCase()}`}
       </Button>,
     ],
     imageOptions: {

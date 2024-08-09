@@ -47,7 +47,7 @@ export const Deposit = async ({ ctx, message, sessionId }) => {
         {`Skip ⏩`}
       </Button>,
     ],
-    textInput: message ? " " + message : " Enter custom $USDC to deposit ",
+    textInput: "Enter custom $USDC to deposit",
     imageOptions: {
       fonts: fonts,
       aspectRatio: "1:1",

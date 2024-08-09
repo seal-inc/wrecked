@@ -14,7 +14,6 @@ const handleRequest = frames(async (ctx) => {
     return error("Player not found");
   }
   const txdata = await getExitTxData(player);
-  console.log({ txdata });
   return transaction(txdata);
 });
 
