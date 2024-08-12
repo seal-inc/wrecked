@@ -25,25 +25,27 @@ const handleRequest = async (req) => {
       >
         <div tw="flex justify-end mt-[350px] mr-[390px]">
           <div tw="flex">
-            <span tw="flex text-[#045BB0] text-4xl">{totalDeposits}</span>
+            <span tw="flex text-[#045BB0] text-4xl">
+              {Number(totalDeposits).toFixed(1)}
+            </span>
           </div>
         </div>
         <div tw="flex w-full mt-[135px]">
           <div tw="flex w-1/2 justify-end">
             <span tw=" text-[#045BB0] text-4xl pr-[55px]">
-              {player.award_token_balances["degen"] || 0}
+              {Number(player.award_token_balances["degen"] || 0).toFixed(1)}
             </span>
           </div>
           <div tw="flex w-1/2 justify-end">
             <span tw="flex text-[#045BB0] text-4xl pr-[120px]">
-              {player.award_token_balances["higher"] || 0}
+              {Number(player.award_token_balances["higher"] || 0).toFixed(1)}
             </span>
           </div>
         </div>
         <div tw="flex w-full mt-[35px]">
           <div tw="flex w-1/2 justify-end">
             <span tw=" text-[#045BB0] text-4xl pr-[55px]">
-              {player.award_token_balances["tybg"] || 0}
+              {Number(player.award_token_balances["tybg"] || 0).toFixed(1)}
             </span>
           </div>
           <div tw="flex w-1/2 justify-end">
@@ -60,7 +62,7 @@ const handleRequest = async (req) => {
                 profit > 0 ? "text-[#045BB0]" : "text-red-500"
               }`}
             >
-              {Number(profit.toFixed(1))}
+              {Number(profit).toFixed(1)}
             </span>
           </div>
         </div>
