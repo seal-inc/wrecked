@@ -27,7 +27,7 @@ const handleRequest = async (req) => {
             {payoutMultiple === 2 || payoutMultiple === 3
               ? "WINNER! WINNER!"
               : payoutMultiple === 5
-              ? "🐋 LOOK AT U 🐋 "
+              ? "WHALE LOOK AT U"
               : payoutMultiple === 10
               ? "🌙 2 The Moooon 🌙"
               : "TRY AGAIN!"}
