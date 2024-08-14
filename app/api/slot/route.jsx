@@ -14,7 +14,6 @@ import {
   getPlayWithId,
   getSessionWithId,
   updatePlayerAccount,
-  updateSession,
 } from "@/components/db/query";
 import { error } from "frames.js/core";
 import { Info } from "@/components/frames/Info";
@@ -125,6 +124,7 @@ const handleRequest = frames(async (ctx) => {
         ctx,
         sessionId,
         message: `Your Balance: ${playAmountBalance} USDC`,
+        player,
       });
     } else if (action === "Play") {
       return Play({ ctx, sessionId, player });
@@ -141,7 +141,9 @@ const handleRequest = frames(async (ctx) => {
       ) {
         return Deposit({
           ctx,
+          sessionId,
           message: `Your Balance: ${playAmountBalance} USDC`,
+          player,
         });
       }
       return Outcome({ ctx, sessionId, player });

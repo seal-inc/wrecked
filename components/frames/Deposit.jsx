@@ -1,8 +1,10 @@
 import { Button } from "frames.js/next";
 import { fonts } from "../game/fonts";
 
-export const Deposit = async ({ ctx, message, sessionId }) => {
-  const imageUrl = `${process.env.APP_URL}/artifacts/deposit.gif`;
+export const Deposit = async ({ ctx, message, sessionId, player }) => {
+  const imageUrl = `${
+    process.env.APP_URL
+  }/api/slot/image/deposit?id=${Date.now()}&&player=${JSON.stringify(player)}`;
 
   console.log("Response returns", Date.now());
   return {
