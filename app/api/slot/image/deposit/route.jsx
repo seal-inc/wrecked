@@ -18,7 +18,8 @@ const handleRequest = async (req) => {
       >
         <div tw="flex flex-col mt-[1000px] items-end w-full h-full">
           <span tw="flex text-[#0CFFC2] mr-[220px] text-[32px]">
-            {Number(100 || 0).toLocaleString()} USDC
+            {Number(player.play_token_balances["usdc"] || 0).toLocaleString()}{" "}
+            USDC
           </span>
         </div>
       </div>
