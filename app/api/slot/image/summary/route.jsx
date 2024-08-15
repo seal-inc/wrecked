@@ -17,7 +17,7 @@ const handleRequest = async (req) => {
       <div
         tw="flex flex-col w-full h-full"
         style={{
-          backgroundImage: `url(${process.env.APP_URL}/artifacts/summary.jpg)`,
+          backgroundImage: `url(${process.env.APP_URL}/artifacts/summary.png)`,
           backgroundSize: "100% 100%",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
