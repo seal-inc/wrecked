@@ -39,6 +39,7 @@ const handleRequest = frames(async (ctx) => {
     let sessionId = ctx.searchParams.sessionId;
     const playerId = ctx.message?.requesterFid;
     const playId = ctx.searchParams.playId;
+    console.log({ validSignature: ctx.message?.isValid });
     if (ctx.message ? !ctx.message?.isValid : false) {
       return error("Invalid signature", 400);
     }
