@@ -19,14 +19,14 @@ import { error } from "frames.js/core";
 import { Info } from "@/components/frames/Info";
 import { Ch13Details } from "@/components/frames/Ch13Details";
 
-const allowlist = new Set([
-  21224, 886, 13648, 315, 13180, 4923, 338915, 2210, 119, 2904, 258796, 296520,
-  355543, 297636, 291673, 339558, 238132, 358, 254210, 241532, 346075, 301772,
-  1214, 325, 265885, 16857, 333079, 302846, 8004, 2417, 4461, 771, 59, 3391,
-  1338, 3850, 258564, 417554, 390336, 337018, 273708, 18751, 200375, 4995,
-  226972, 323021, 263574, 249121, 474326, 381440, 383327, 377610, 1634, 16, 18,
-  9274,
-]);
+// const allowlist = new Set([
+//   21224, 886, 13648, 315, 13180, 4923, 338915, 2210, 119, 2904, 258796, 296520,
+//   355543, 297636, 291673, 339558, 238132, 358, 254210, 241532, 346075, 301772,
+//   1214, 325, 265885, 16857, 333079, 302846, 8004, 2417, 4461, 771, 59, 3391,
+//   1338, 3850, 258564, 417554, 390336, 337018, 273708, 18751, 200375, 4995,
+//   226972, 323021, 263574, 249121, 474326, 381440, 383327, 377610, 1634, 16, 18,
+//   9274,
+// ]);
 
 const handleRequest = frames(async (ctx) => {
   let player;
@@ -111,9 +111,9 @@ const handleRequest = frames(async (ctx) => {
       });
       return Play({ ctx, sessionId, player });
     } else if (action === "Deposit") {
-      if (!allowlist.has(playerId)) {
-        throw new Error("NOT ALLOWED");
-      }
+      // if (!allowlist.has(playerId)) {
+      //   throw new Error("NOT ALLOWED");
+      // }
       const playAmountBalance =
         Math.round(
           Number(
@@ -157,12 +157,12 @@ const handleRequest = frames(async (ctx) => {
       return Intro({});
     }
   } catch (err) {
-    if (err.message === "NOT ALLOWED") {
-      return error(
-        "Oops! You are not on the allowlist. Join the waitlist to play.",
-        400
-      );
-    }
+    // if (err.message === "NOT ALLOWED") {
+    //   return error(
+    //     "Oops! You are not on the allowlist. Join the waitlist to play.",
+    //     400
+    //   );
+    // }
     console.error({ err, ctx });
     return error("Ooops! DM @mememania for help", 400);
   }
