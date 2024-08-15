@@ -23,7 +23,7 @@ const handleRequest = async (req) => {
           backgroundPosition: "center",
         }}
       >
-        <div tw="flex justify-end mt-[350px] mr-[390px]">
+        <div tw="flex justify-end mt-[370px] mr-[380px]">
           <div tw="flex">
             <span tw="flex text-[#045BB0] text-4xl">
               {Number(totalDeposits).toFixed(1)}
@@ -32,30 +32,33 @@ const handleRequest = async (req) => {
         </div>
         <div tw="flex w-full mt-[135px]">
           <div tw="flex w-1/2 justify-end">
-            <span tw=" text-[#045BB0] text-4xl pr-[55px]">
-              {Number(player.award_token_balances["degen"] || 0).toFixed(1)}
+            <span tw=" text-[#045BB0] text-4xl pr-[30px]">
+              {Number(player.award_token_balances["degen"]) ||
+                Number(0).toFixed(1)}
             </span>
           </div>
           <div tw="flex w-1/2 justify-end">
-            <span tw="flex text-[#045BB0] text-4xl pr-[120px]">
-              {Number(player.award_token_balances["higher"] || 0).toFixed(1)}
+            <span tw="flex text-[#045BB0] text-4xl pr-[140px]">
+              {Number(player.award_token_balances["higher"]) ||
+                Number(0).toFixed(1)}
             </span>
           </div>
         </div>
-        <div tw="flex w-full mt-[35px]">
+        <div tw="flex w-full mt-[25px]">
           <div tw="flex w-1/2 justify-end">
-            <span tw=" text-[#045BB0] text-4xl pr-[55px]">
-              {Number(player.award_token_balances["tybg"] || 0).toFixed(1)}
+            <span tw=" text-[#045BB0] text-4xl pr-[30px]">
+              {Number(player.award_token_balances["tybg"]) ||
+                Number(0).toFixed(1)}
             </span>
           </div>
           <div tw="flex w-1/2 justify-end">
-            <span tw="flex text-[#045BB0] text-4xl pr-[120px]">
+            <span tw="flex text-[#045BB0] text-4xl pr-[140px]">
               {Number(player.play_token_balances["usdc"] || 0).toFixed(1)}
             </span>
           </div>
         </div>
 
-        <div tw="flex justify-end mt-[160px] mr-[390px]">
+        <div tw="flex justify-end mt-[130px] mr-[380px]">
           <div tw="flex">
             <span
               tw={`flex text-4xl ${
