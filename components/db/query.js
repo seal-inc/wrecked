@@ -165,7 +165,7 @@ export async function getOrCreateUserWithId(fid) {
   const data = {
     id: fid,
     username: userData?.username,
-    play_token_balances: { usdc: 1 },
+    play_token_balances: { usdc: 0 },
   };
 
   // Step 3: If the record does not exist, insert a new one
