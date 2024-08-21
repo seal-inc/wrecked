@@ -18,6 +18,7 @@ import {
 import { error } from "frames.js/core";
 import { Info } from "@/components/frames/Info";
 import { Ch13Details } from "@/components/frames/Ch13Details";
+import { Promo } from "@/components/frames/Promo";
 
 // const allowlist = new Set([
 //   21224, 886, 13648, 315, 13180, 4923, 338915, 2210, 119, 2904, 258796, 296520,
@@ -39,7 +40,6 @@ const handleRequest = frames(async (ctx) => {
     let sessionId = ctx.searchParams.sessionId;
     const playerId = ctx.message?.requesterFid;
     const playId = ctx.searchParams.playId;
-    console.log({ validSignature: ctx.message?.isValid });
     if (ctx.message ? !ctx.message?.isValid : false) {
       return error("Invalid signature", 400);
     }
@@ -86,7 +86,7 @@ const handleRequest = frames(async (ctx) => {
     }
 
     if (action === "Info") {
-      return Info({});
+      return Info({ player });
     } else if (action === "Ch13Details") {
       return Ch13Details({});
     } else if (transactionHash && action === "Deposit") {
@@ -146,6 +146,9 @@ const handleRequest = frames(async (ctx) => {
           message: `Your Balance: ${playAmountBalance} USDC`,
           player,
         });
+      }
+      if (player.first_time && !ctx.searchParams.promoSpin) {
+        return Promo({ ctx, sessionId });
       }
       return Outcome({ ctx, sessionId, player });
     } else if (action === "End") {

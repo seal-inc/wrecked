@@ -9,7 +9,7 @@ const handleRequest = frames(async (ctx) => {
   let amount;
 
   if (pressedButton.index === 1) {
-    amount = 10;
+    amount = 5;
   } else if (pressedButton.index === 2) {
     if (
       typeof inputText === "string" &&

@@ -16,8 +16,8 @@ const handleRequest = async (req) => {
           backgroundPosition: "center",
         }}
       >
-        <div tw="flex flex-col mt-[1000px] items-end w-full h-full">
-          <span tw="flex text-[#0CFFC2] mr-[220px] text-[32px]">
+        <div tw="flex flex-col mt-[987px] items-start w-full h-full">
+          <span tw="flex text-[#0CFFC2] ml-[715px] text-[30px]">
             {Number(player.play_token_balances["usdc"] || 0).toLocaleString()}{" "}
             USDC
           </span>

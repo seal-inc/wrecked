@@ -4,7 +4,10 @@ import { executePlay } from "../game/executePlay";
 import { registerPlay, updatePlayerAccount } from "../db/query";
 
 export const Outcome = async ({ ctx, sessionId, player }) => {
-  const playAmount = Number(ctx.searchParams.amount);
+  const playAmount = player.first_time
+    ? 5 + Number(ctx.searchParams.amount)
+    : Number(ctx.searchParams.amount);
+
   const playerId = ctx.message?.requesterFid;
 
   // Get the outcome of the play
@@ -29,9 +32,12 @@ export const Outcome = async ({ ctx, sessionId, player }) => {
 
   await updatePlayerAccount(playerId, {
     play_token_balances: {
-      ["usdc"]: Number(player.play_token_balances["usdc"]) - Number(playAmount),
+      ["usdc"]:
+        Number(player.play_token_balances["usdc"]) -
+        Number(ctx.searchParams.amount),
     },
     ch13_points: player.ch13_points + playAmount * 10,
+    first_time: false,
     award_token_balances: {
       ...(player.award_token_balances || {}),
       ["ch13"]:

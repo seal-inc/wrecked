@@ -1,8 +1,11 @@
 import { Button } from "frames.js/next";
 import { fonts } from "../game/fonts";
 
-export const Info = async ({}) => {
-  const imageUrl = `${process.env.APP_URL}/artifacts/info.png`;
+export const Info = async ({ player }) => {
+  const firstTime = player.first_time;
+  const imageUrl = `${process.env.APP_URL}/artifacts/${
+    firstTime ? "info-new-player" : "info"
+  }.png`;
 
   return {
     image: imageUrl,

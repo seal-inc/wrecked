@@ -23,7 +23,7 @@ export const Deposit = async ({ ctx, message, sessionId, player }) => {
           },
         }}
       >
-        {`10 USDC`}
+        {`5 USDC`}
       </Button>,
       <Button
         action="tx"
