@@ -66,7 +66,7 @@ export const Outcome = async ({ ctx, sessionId, player }) => {
           },
         }}
       >
-        {`Dump for ${play.won_amount_usdc} USDC`}
+        {`Dump for ${Number(play.won_amount_usdc).toLocaleString()} USDC`}
       </Button>,
       <Button
         action="post"
