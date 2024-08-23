@@ -112,9 +112,6 @@ const handleRequest = frames(async (ctx) => {
       });
       return Play({ ctx, sessionId, player });
     } else if (action === "Deposit") {
-      // if (!allowlist.has(playerId)) {
-      //   throw new Error("NOT ALLOWED");
-      // }
       const playAmountBalance =
         Math.round(
           Number(
@@ -146,9 +143,6 @@ const handleRequest = frames(async (ctx) => {
           message: `Your Balance: ${playAmountBalance} USDC`,
           player,
         });
-      }
-      if (player.first_time && !ctx.searchParams.promoSpin) {
-        return Promo({ ctx, sessionId });
       }
       return Outcome({ ctx, sessionId, player });
     } else if (action === "End") {
